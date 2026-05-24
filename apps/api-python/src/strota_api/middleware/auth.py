@@ -34,6 +34,7 @@ from ..security.mtls import check_allowlist, fingerprint_from_pem, is_valid_fing
 from ..security.nonce_store import InMemoryNonceStore, NonceStore, RedisNonceStore
 
 PUBLIC_PATHS: frozenset[str] = frozenset({"/healthz", "/readyz", "/openapi.json"})
+PUBLIC_PREFIXES: tuple[str, ...] = ("/api/auth/",)
 
 MTLS_HEADER = "x-forwarded-client-cert"
 MTLS_FINGERPRINT_HEADER = "x-client-cert-fingerprint-sha256"
@@ -60,7 +61,8 @@ class HmacAuthMiddleware(BaseHTTPMiddleware):
         request: Request,
         call_next: Callable[[Request], Awaitable[Response]],
     ) -> Response:
-        if request.url.path in PUBLIC_PATHS:
+        path = request.url.path
+        if path in PUBLIC_PATHS or any(path.startswith(p) for p in PUBLIC_PREFIXES):
             return await call_next(request)
 
         settings = self._settings
@@ -128,7 +130,9 @@ class HmacAuthMiddleware(BaseHTTPMiddleware):
         # redis-py types sismember as a union of sync int and awaitable for
         # client-mode overloading. The asyncio client always returns the
         # awaitable; we cast so mypy strict accepts the await.
-        coro = cast(Awaitable[int], client.sismember(self._settings.mtls_crl_redis_key, fingerprint))
+        coro = cast(
+            Awaitable[int], client.sismember(self._settings.mtls_crl_redis_key, fingerprint)
+        )
         return bool(await coro)
 
     @staticmethod

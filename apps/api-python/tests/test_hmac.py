@@ -23,8 +23,7 @@ SECRET_PREV = "y" * 32
 def test_canonical_message_empty_body() -> None:
     msg = canonical_message("1700000000", "nonce123", b"")
     assert msg == (
-        "1700000000.nonce123."
-        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        "1700000000.nonce123.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     )
 
 

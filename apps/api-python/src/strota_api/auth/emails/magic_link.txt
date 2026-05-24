@@ -1,0 +1,15 @@
+Guten Tag${name},
+
+Ihr Anmeldelink fuer Strota ist 15 Minuten gueltig:
+
+  ${magic_url}
+
+Der Link funktioniert genau einmal und meldet Sie automatisch an. Falls
+Sie ihn nicht angefordert haben, ignorieren Sie diese E-Mail.
+
+Mit freundlichen Gruessen
+Ihr Strota-Team
+
+--
+Strota | strota.de
+Bei Fragen: hallo@strota.de

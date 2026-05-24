@@ -1,0 +1,17 @@
+Guten Tag${name},
+
+bitte bestaetigen Sie Ihre E-Mail-Adresse fuer Ihr Strota-Konto, indem Sie
+den folgenden Link in den naechsten 24 Stunden oeffnen:
+
+  ${verify_url}
+
+Falls Sie kein Strota-Konto angelegt haben, koennen Sie diese E-Mail
+ignorieren. Es wurde nichts auf Ihren Namen aktiviert.
+
+Mit freundlichen Gruessen
+Ihr Strota-Team
+
+--
+Strota | strota.de | Bauantragsplattform DACH
+Diese E-Mail wurde an Sie verschickt, weil unter Ihrer Adresse ein Konto
+angelegt wurde. Bei Fragen: hallo@strota.de
