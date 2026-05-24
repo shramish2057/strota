@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import type { ReactNode } from 'react';
-import { CookieConsent } from '../components/cookie-consent';
-import { SiteFooter } from '../components/site-footer';
 import { fontBody, fontDisplay, fontMono } from '../styles/fonts';
 import '../styles/globals.css';
 
@@ -41,9 +39,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <a href="#main" className="skip-link">
             Zum Hauptinhalt springen
           </a>
-          <main id="main">{children}</main>
-          <SiteFooter />
-          <CookieConsent />
+          <div id="main">{children}</div>
         </NextIntlClientProvider>
       </body>
     </html>
