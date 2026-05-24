@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Backgrounds */
+    --color-bg-base: #f8f7f5;
+    --color-bg-subtle: #f1efe9;
+    --color-bg-elevated: #ffffff;
+    --color-bg-inverse: #111827;
+
+    /* Primary, Deep Slate Blue */
+    --color-primary-900: #0f2540;
+    --color-primary-800: #1a3a5c;
+    --color-primary-700: #1e4a73;
+    --color-primary-600: #245c8c;
+    --color-primary-500: #2e72a8;
+    --color-primary-400: #4d8fbf;
+    --color-primary-100: #e8f1f9;
+    --color-primary-50: #f2f7fc;
+
+    /* Accent, Warm Amber */
+    --color-accent-700: #92610d;
+    --color-accent-600: #b07a14;
+    --color-accent-500: #c8921a;
+    --color-accent-400: #d4a43c;
+    --color-accent-100: #fdf3dc;
+
+    /* Neutrals */
+    --color-neutral-900: #111827;
+    --color-neutral-700: #374151;
+    --color-neutral-500: #6b7280;
+    --color-neutral-300: #d1d5db;
+    --color-neutral-200: #e5e7eb;
+    --color-neutral-100: #f3f4f6;
+
+    /* Semantic */
+    --color-success-700: #14532d;
+    --color-success-600: #166534;
+    --color-success-100: #dcfce7;
+    --color-warning-700: #92400e;
+    --color-warning-500: #b45309;
+    --color-warning-100: #fef3c7;
+    --color-error-700: #7f1d1d;
+    --color-error-600: #991b1b;
+    --color-error-100: #fee2e2;
+
+    /* Typography */
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  [data-theme='dark'] {
+    --color-bg-base: #0e1320;
+    --color-bg-subtle: #1a1f2e;
+    --color-bg-elevated: #232938;
+    --color-bg-inverse: #f8f7f5;
+
+    --color-primary-900: #b7d0e8;
+    --color-primary-700: #6fa3c7;
+    --color-primary-500: #4d8fbf;
+    --color-primary-100: #1a3a5c;
+
+    --color-accent-500: #d4a43c;
+    --color-accent-100: #3a2a0a;
+
+    --color-neutral-900: #f3f4f6;
+    --color-neutral-700: #d1d5db;
+    --color-neutral-500: #9ca3af;
+    --color-neutral-300: #4b5563;
+    --color-neutral-200: #374151;
+    --color-neutral-100: #1f2937;
+
+    --color-success-700: #bbf7d0;
+    --color-success-100: #14532d;
+    --color-warning-500: #fcd34d;
+    --color-warning-100: #78350f;
+    --color-error-600: #fca5a5;
+    --color-error-100: #7f1d1d;
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--color-bg-base);
+    color: var(--color-neutral-900);
+    font-family: var(--font-body);
+    font-feature-settings: 'kern' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tabular numerals everywhere numbers appear in tables */
+  table,
+  .tabular-numbers {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Reduced-motion respect, per WCAG 2.2 + Strota Anti-Pattern Liste */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus-visible outline, Accessibility Baseline */
+  :focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+  }
+  .skip-link:focus {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 9999;
+    background: var(--color-bg-elevated);
+    color: var(--color-neutral-900);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-neutral-300);
+  }
+}
