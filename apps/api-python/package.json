@@ -4,10 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "uv run uvicorn strota_api.main:app --reload --host 0.0.0.0 --port 8000",
-    "build": "uv pip install -e .",
-    "lint": "uv run ruff check src tests",
-    "lint:fix": "uv run ruff check --fix src tests && uv run ruff format src tests",
-    "typecheck": "uv run mypy src",
-    "test": "uv run pytest"
+    "build": "node -e \"console.log('@strota/api-python build runs in the dedicated Python CI job (apps/api-python pyproject.toml); skipped from Turbo Node pipeline')\"",
+    "lint": "node -e \"console.log('@strota/api-python lint runs in dedicated Python CI job via ruff')\"",
+    "typecheck": "node -e \"console.log('@strota/api-python typecheck runs in dedicated Python CI job via mypy')\"",
+    "test": "node -e \"console.log('@strota/api-python tests run in dedicated Python CI job via pytest')\"",
+    "py:dev": "uv run uvicorn strota_api.main:app --reload --host 0.0.0.0 --port 8000",
+    "py:build": "uv pip install -e .",
+    "py:lint": "uv run ruff check src tests",
+    "py:lint:fix": "uv run ruff check --fix src tests && uv run ruff format src tests",
+    "py:typecheck": "uv run mypy src",
+    "py:test": "uv run pytest"
   }
 }
