@@ -47,6 +47,20 @@ jobs:
     name: Python (ruff + mypy + pytest)
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: strota_dev
+          POSTGRES_DB: strota
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d strota"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     defaults:
       run:
         working-directory: apps/api-python
@@ -57,6 +71,19 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Install psql client (for migration apply)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends postgresql-client
+
+      - name: Apply migrations
+        working-directory: .
+        env:
+          PGPASSWORD: strota_dev
+        run: |
+          set -euo pipefail
+          for f in 001_initial_schema 002_rls_policies 003_triggers_lifecycle 004_seed 005_self_hosted_auth; do
+            psql -v ON_ERROR_STOP=1 -h 127.0.0.1 -p 55432 -U postgres -d strota -f db/migrations/$f.sql
+          done
 
       - name: Install uv
         run: pip install uv==0.4.27
@@ -81,6 +108,8 @@ jobs:
         env:
           HMAC_SECRET: ${{ secrets.CI_HMAC_SECRET_DUMMY || 'x_for_ci_only_x_for_ci_only_xxxx' }}
           ENVIRONMENT: testing
+          DATABASE_URL: postgres://postgres:strota_dev@127.0.0.1:55432/strota
+          JWT_SIGNING_KEY: ci_jwt_signing_key_ci_jwt_signing_key_xxx
         run: |
           source .venv/bin/activate
           pytest
