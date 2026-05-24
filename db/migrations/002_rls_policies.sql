@@ -36,10 +36,18 @@ CREATE OR REPLACE FUNCTION current_user_is_admin() RETURNS boolean
   )
 $$;
 
--- Revoke execute from anon; only authenticated and service_role should call.
-REVOKE EXECUTE ON FUNCTION current_user_org_id()      FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION current_user_can_write()   FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION current_user_is_admin()    FROM PUBLIC;
+-- Helpers stay PUBLIC-executable on purpose: they take no input and return
+-- the caller's own org_id / role flags (derived from auth.uid()). Without
+-- EXECUTE every project-scoped policy fails closed with
+-- "permission denied for function current_user_org_id". The security boundary
+-- here is SECURITY DEFINER + locked search_path, not GRANT.
+--
+-- Explicit GRANT TO PUBLIC overrides any stale ACL left by a previous
+-- REVOKE run; CREATE OR REPLACE FUNCTION preserves prior grants and would
+-- otherwise leave the function locked to the owner.
+GRANT EXECUTE ON FUNCTION current_user_org_id()    TO PUBLIC;
+GRANT EXECUTE ON FUNCTION current_user_can_write() TO PUBLIC;
+GRANT EXECUTE ON FUNCTION current_user_is_admin()  TO PUBLIC;
 
 -- ---------------------------------------------------------------------
 -- Enable RLS on every public-schema table
