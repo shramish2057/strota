@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { CookieConsent } from '../components/cookie-consent';
 import { SiteFooter } from '../components/site-footer';
+import { fontBody, fontDisplay, fontMono } from '../styles/fonts';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
@@ -26,7 +27,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="de" suppressHydrationWarning>
+    <html
+      lang="de"
+      suppressHydrationWarning
+      className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
+    >
       <body>
         <a href="#main" className="skip-link">
           Zum Hauptinhalt springen
