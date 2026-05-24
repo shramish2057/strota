@@ -1,0 +1,13 @@
+{
+  "name": "@strota/api-python",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "uv run uvicorn strota_api.main:app --reload --host 0.0.0.0 --port 8000",
+    "build": "uv pip install -e .",
+    "lint": "uv run ruff check src tests",
+    "lint:fix": "uv run ruff check --fix src tests && uv run ruff format src tests",
+    "typecheck": "uv run mypy src",
+    "test": "uv run pytest"
+  }
+}

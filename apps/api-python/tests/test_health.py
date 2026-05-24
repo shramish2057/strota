@@ -1,0 +1,36 @@
+"""Health endpoint smoke tests."""
+
+from __future__ import annotations
+
+import os
+
+import pytest
+from fastapi.testclient import TestClient
+
+
+@pytest.fixture(scope="module")
+def client() -> TestClient:
+    os.environ.setdefault("HMAC_SECRET", "x" * 32)
+    from strota_api.main import create_app
+
+    return TestClient(create_app())
+
+
+def test_healthz_returns_ok(client: TestClient) -> None:
+    response = client.get("/healthz")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["status"] == "ok"
+    assert body["service"] == "strota-api"
+
+
+def test_readyz_returns_ready(client: TestClient) -> None:
+    response = client.get("/readyz")
+    assert response.status_code == 200
+    assert response.json()["status"] == "ready"
+
+
+def test_unauthenticated_protected_path_returns_401(client: TestClient) -> None:
+    """Until Commit 5 lands, any non-public path returns 401 from the auth stub."""
+    response = client.get("/api/protected/example")
+    assert response.status_code == 401
