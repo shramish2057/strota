@@ -1,0 +1,159 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  node:
+    name: Node (lint + typecheck + test + build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+  python:
+    name: Python (ruff + mypy + pytest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: apps/api-python
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        run: pip install uv==0.4.27
+
+      - name: Create venv and install
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv pip install -e ".[dev]"
+
+      - name: Ruff (lint)
+        run: |
+          source .venv/bin/activate
+          ruff check src tests
+
+      - name: Mypy (strict)
+        run: |
+          source .venv/bin/activate
+          mypy src
+
+      - name: Pytest
+        env:
+          HMAC_SECRET: ${{ secrets.CI_HMAC_SECRET_DUMMY || 'x_for_ci_only_x_for_ci_only_xxxx' }}
+          ENVIRONMENT: testing
+        run: |
+          source .venv/bin/activate
+          pytest
+
+  integration:
+    name: Integration (HMAC round-trip TS <-> Python)
+    needs: [node, python]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11
+          cache: pnpm
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Node deps and build shared
+        run: |
+          pnpm install --frozen-lockfile=false
+          pnpm --filter @strota/shared build
+
+      - name: Install Python uv and api deps
+        run: |
+          pip install uv==0.4.27
+          cd apps/api-python
+          uv venv
+          source .venv/bin/activate
+          uv pip install -e .
+
+      - name: Run cross-language round-trip
+        run: node tests/integration/hmac_round_trip.mjs
+
+  punctuation-guard:
+    name: Punctuation guard (no em-dash in source / docs)
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for em-dash or double-dash in tracked files
+        run: |
+          # Exclude lockfiles, vendored content, and markdown YAML frontmatter delimiters.
+          # Double-dash check excludes occurrences inside HTML comments and CLI flags.
+          set -euo pipefail
+          PATTERN='—'
+          if grep -RIn --binary-files=without-match "$PATTERN" \
+            --exclude-dir=node_modules \
+            --exclude-dir=.git \
+            --exclude-dir=.next \
+            --exclude-dir=dist \
+            --exclude-dir=.turbo \
+            --exclude-dir=.venv \
+            --exclude='pnpm-lock.yaml' \
+            --exclude='*.lock' \
+            --exclude='*.svg' \
+            --exclude='*.png' \
+            --exclude='*.jpg' \
+            --exclude='*.pdf' \
+            .; then
+            echo "::error::Em-dash detected. Use single dash, comma, or colon instead."
+            exit 1
+          fi
+          echo "Punctuation guard passed."
