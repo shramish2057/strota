@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7-labs
 
 # Build stage: install with uv for reproducibility.
-FROM python:3.12-slim-bookworm AS build
+FROM python:3.14-slim-bookworm AS build
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
@@ -23,7 +23,7 @@ ENV PATH=/opt/venv/bin:$PATH
 RUN uv pip install -e .
 
 # Runtime stage: minimal, non-root user.
-FROM python:3.12-slim-bookworm AS runtime
+FROM python:3.14-slim-bookworm AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PATH=/opt/venv/bin:$PATH
