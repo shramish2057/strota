@@ -8,6 +8,11 @@ CLAUDE.md
 strota_product_bible.md
 .claude/
 
+# Competitor reference material (never publish, never enter git)
+design-copy/
+design-refs/
+competitor-refs/
+
 # Node / pnpm / Turborepo
 node_modules/
 .pnpm-store/
