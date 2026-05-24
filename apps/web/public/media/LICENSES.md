@@ -26,15 +26,18 @@ Pexels-Fotos sind nach der Pexels-Lizenz nutzbar:
 
 Quelle: https://www.pexels.com/license/
 
-## Aktive Pexels-Bilder
+## Aktive Pexels-Medien
 
-> Tragen Sie hier jeden hochgeladenen Pexels-Foto-Slot mit URL und Fotografin ein,
-> sobald Sie ihn aktivieren. Solange ein Slot leer ist, rendert Strota stattdessen
-> die SVG/CSS-Fallback-Komposition.
+| Datei                         | Slot                   | Pexels-URL                                 | Fotografin                | Hochgeladen am |
+| ----------------------------- | ---------------------- | ------------------------------------------ | ------------------------- | -------------- |
+| `hero-placeholder.mp4`        | Startseite Hero Banner | https://www.pexels.com/video/1721294/      | _Verifikation ausstehend_ | 2026-05-24     |
+| `hero-poster.jpg`             | Hero Poster Fallback   | https://www.pexels.com/video/1721294/      | _Verifikation ausstehend_ | 2026-05-24     |
 
-| Slot | Pexels-URL | Fotografin | Hochgeladen am |
-| ---- | ---------- | ---------- | -------------- |
-| (noch leer) | | | |
+> **Hinweis Platzhalter**: `hero-placeholder.mp4` zeigt eine urbane Strassenszene
+> aus London und ist nur ein Platzhalter, bis ein passendes DACH-Architektur-Video
+> ausgewaehlt ist. Ersatz erfolgt durch (a) Pexels-API-Suche mit `PEXELS_API_KEY`
+> oder (b) gezielte Pexels-URL-Auswahl. Beim Ersatz: Datei ueberschreiben und Zeile
+> oben aktualisieren mit echtem Photographer-Credit.
 
 ## Inline-SVG und CSS-Art
 

@@ -1,8 +1,7 @@
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@strota/ui';
 import Link from 'next/link';
 import { GenehmigungsfreiHeroForm } from '../../components/home/genehmigungsfrei-hero-form';
-import { HeroBackdrop } from '../../components/home/hero-backdrop';
-import { ProductPreview } from '../../components/home/product-preview';
+import { HeroVideo } from '../../components/home/hero-video';
 import { SoftwareApplicationJsonLd } from '../../components/seo/json-ld';
 
 export default function HomePage(): JSX.Element {
@@ -24,32 +23,30 @@ export default function HomePage(): JSX.Element {
 
 function Hero(): JSX.Element {
   return (
-    <section className="relative overflow-hidden border-b border-neutral-200 bg-bg-base">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:px-8 lg:py-24">
-        <div className="max-w-xl">
+    <section className="relative isolate overflow-hidden border-b border-neutral-200">
+      <HeroVideo />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-900/95 via-primary-900/80 to-primary-900/40"
+      />
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:px-8 lg:py-28">
+        <div className="max-w-2xl text-white">
           <div className="inline-flex items-center gap-2">
             <Badge tone="primary">Bayern Live</Badge>
-            <Badge tone="neutral">DACH Roadmap 2026/27</Badge>
+            <Badge tone="accent">DACH Roadmap 2026/27</Badge>
           </div>
-          <h1 className="mt-6 font-display text-5xl leading-[1.05] text-primary-900 sm:text-6xl">
-            Bauanträge,{' '}
-            <span className="text-primary-700">vollständig</span> bevor sie eingereicht werden.
+          <h1 className="mt-6 font-display text-5xl leading-[1.04] sm:text-6xl">
+            Bauanträge, vollständig bevor sie eingereicht werden.
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-neutral-700">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-primary-100/90">
             Strota klärt in 60 Sekunden, ob Ihr Vorhaben überhaupt einen Antrag braucht, welches Verfahren greift und welche Pflichtnachweise fehlen. Heute live in Bayern, Bundesland für Bundesland im Ausbau.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 max-w-xl">
             <GenehmigungsfreiHeroForm />
           </div>
-          <p className="mt-4 text-xs text-neutral-500">
+          <p className="mt-4 text-xs text-primary-100/70">
             Kein Konto nötig. Wir speichern die Adresse nicht ohne Ihre Zustimmung. DSGVO &amp; BDSG, Hosting in Deutschland.
           </p>
-        </div>
-        <div className="relative flex items-center justify-center">
-          <HeroBackdrop />
-          <div className="relative w-full max-w-2xl">
-            <ProductPreview />
-          </div>
         </div>
       </div>
     </section>
