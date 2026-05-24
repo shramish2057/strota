@@ -1,9 +1,9 @@
--- Rollback for 004_seed.sql: removes seeded rows by UUID prefix.
-DELETE FROM bauherren WHERE id LIKE 'dddddddd%';
+-- Rollback for 004_seed.sql: removes seeded rows by UUID prefix (cast to text for LIKE).
+DELETE FROM bauherren WHERE id::text LIKE 'dddddddd%';
 DELETE FROM required_documents WHERE project_id IN (
-  SELECT id FROM projects WHERE id LIKE 'cccccccc%'
+  SELECT id FROM projects WHERE id::text LIKE 'cccccccc%'
 );
-DELETE FROM projects WHERE id LIKE 'cccccccc%';
+DELETE FROM projects WHERE id::text LIKE 'cccccccc%';
 DELETE FROM users_standorte WHERE user_id IN (
   '11111111-1111-1111-1111-111111111111',
   '22222222-2222-2222-2222-222222222222',
@@ -18,8 +18,8 @@ DELETE FROM users WHERE id IN (
   '22222222-2222-2222-2222-222222222222',
   '33333333-3333-3333-3333-333333333333'
 );
-DELETE FROM standorte WHERE id LIKE 'bbbbbbbb%';
-DELETE FROM organizations WHERE id LIKE 'aaaaaaaa%';
+DELETE FROM standorte WHERE id::text LIKE 'bbbbbbbb%';
+DELETE FROM organizations WHERE id::text LIKE 'aaaaaaaa%';
 DELETE FROM auth.users WHERE id IN (
   '11111111-1111-1111-1111-111111111111',
   '22222222-2222-2222-2222-222222222222',
