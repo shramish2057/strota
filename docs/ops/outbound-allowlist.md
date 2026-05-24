@@ -13,7 +13,6 @@ Default deny on Hetzner `strota-api` (CCX53). Egress only to the destinations be
 | `sgx.geodatenzentrum.de`, `gdz.bkg.bund.de` | BKG Geocoder (AGS resolution) | HTTPS 443 |
 | `database.clamav.net`, `current.cvd.clamav.net` | ClamAV signature updates (freshclam) | HTTPS 443 |
 | `*.hetzner.cloud`, `*.your-objectstorage.com` | Hetzner Object Storage + Cloud API | HTTPS 443 |
-| `*.supabase.co`, `*.supabase.com` | Supabase (DB, Auth, Realtime, Storage) | HTTPS 443 |
 | `*.cloudflare.com` | Tunnel control plane | HTTPS 443 |
 | `pool.ntp.org`, `time.cloudflare.com` | NTP (skew control critical for HMAC) | NTP 123 |
 

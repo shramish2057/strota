@@ -12,7 +12,6 @@ Every external service needs an account, a signed DPA / AVV where DSGVO applies,
 | AWS (for Bedrock pass-through) | Founder | AWS DPA + SCC | eu-central-1 Frankfurt | aws.access_key_id, aws.secret_access_key |
 | BKG Geocoder | Founder | terms-only (registration at gdz.bkg.bund.de) | DE (federal) | bkg.api_key |
 | Hetzner | Founder | DPA signed | DE (NUE + FAL) + FI (HEL backup) | hetzner.cloud_token, hetzner.s3_keys |
-| Supabase | Founder | DPA signed | EU-Frankfurt | supabase.url, supabase.anon_key, supabase.service_role_key |
 | Cloudflare | Founder | DPA signed + SCC | global; EU termination | cloudflare.api_token, cloudflare.tunnel_token |
 | Vercel | Founder | DPA signed | EU-Frankfurt | vercel.deploy_token |
 | Sentry (self-hosted on Hetzner) | Eng-Lead | n/a (self-hosted) | DE | sentry.auth_token, sentry.dsn |

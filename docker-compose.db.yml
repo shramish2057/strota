@@ -1,5 +1,6 @@
-# Lightweight Postgres for schema iteration and CI migration smoke tests.
-# Production Supabase runs in EU-Frankfurt; this is for local-only validation.
+# Postgres + Redis for local development and CI migration smoke tests.
+# In production these run on the Hetzner CCX53 directly (not under Docker).
+# See ADR-0001 (single-node) and ADR-0006 (self-hosted Postgres + custom auth).
 services:
   postgres:
     image: postgres:17-alpine

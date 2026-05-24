@@ -7,14 +7,14 @@ Semi-annual disaster-recovery drill. RPO target 24h, RTO target 4h (Bible v5.0 P
 - [ ] On-call schedule confirmed.
 - [ ] Staging environment idle, safe to overwrite.
 - [ ] Most recent Hetzner Object Storage backup snapshot identified (use `aws s3 ls s3://strota-documents-backup-hel/`).
-- [ ] Supabase PITR snapshot for the same point-in-time identified.
+- [ ] Most recent `pgbackrest` Postgres backup identified (use `pgbackrest info`).
 - [ ] Communication template prepared (this is a drill, no customer impact expected).
 
 ## Drill steps
 
 1. **T+0** Announce drill in on-call channel; freeze prod writes for the drill window.
 2. **T+0:05** Pick a random backup from the last 30 days (NOT the most recent - confirms older backups also restore).
-3. **T+0:10** Restore Supabase PITR snapshot to staging project.
+3. **T+0:10** Bring up a staging CCX23 from snapshot; restore Postgres via `pgbackrest --type=time --target='...' restore`.
 4. **T+0:30** Restore Hetzner Object Storage backup bucket to staging bucket.
 5. **T+1:00** Bring up FastAPI staging instance pointed at restored DB + bucket.
 6. **T+1:30** Bring up Vercel preview deployment of web pointed at FastAPI staging.

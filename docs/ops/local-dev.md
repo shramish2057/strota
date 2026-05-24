@@ -8,7 +8,8 @@ What every engineer needs on their machine the first day.
 - **pnpm 9.12.0** via Corepack: `corepack enable && corepack prepare pnpm@9.12.0 --activate`.
 - **Python 3.12** via system package manager or pyenv.
 - **uv** for Python deps: `pipx install uv` or `brew install uv`.
-- **Docker** for local Redis + (later) ClamAV, Ghostscript, VeraPDF.
+- **Docker** for local Postgres + Redis + (later) ClamAV, Ghostscript, VeraPDF.
+- **psql** (Postgres client) for migration smoke tests: `brew install libpq && brew link --force libpq` or `apt install postgresql-client`.
 - **Git** with user.name and user.email configured.
 
 ## First-time setup
@@ -33,6 +34,14 @@ cd ../..
 
 # Web
 cp apps/web/.env.example apps/web/.env
+
+# Postgres + Redis (both run in one compose file)
+docker compose -f docker-compose.db.yml up -d
+# Wait a few seconds then apply all migrations:
+for f in 001_initial_schema 002_rls_policies 003_triggers_lifecycle 004_seed 005_self_hosted_auth; do
+  PGPASSWORD=strota_dev psql -h 127.0.0.1 -p 55432 -U postgres -d strota \
+    -v ON_ERROR_STOP=1 -f db/migrations/$f.sql
+done
 ```
 
 ## Daily workflow
@@ -56,18 +65,21 @@ pnpm --filter @strota/shared build
 node tests/integration/hmac_round_trip.mjs
 ```
 
-## Local Redis (for nonce store)
+## Local Postgres + Redis
 
 ```bash
-docker run --rm -p 6379:6379 redis:7-alpine
+docker compose -f docker-compose.db.yml up -d   # Postgres 55432, Redis 6379
+docker compose -f docker-compose.db.yml down    # Stop
+docker compose -f docker-compose.db.yml down -v # Stop + wipe data volumes
 ```
 
 ## Where things live
 
 - `apps/web/` - Next.js 15 user-facing app.
-- `apps/api-python/` - FastAPI backend.
+- `apps/api-python/` - FastAPI backend + custom auth.
 - `packages/shared/` - shared TS types + HMAC.
 - `packages/corpus/` - regulatory corpus (Phase 4 fills Bayern).
+- `db/migrations/` - numbered SQL migrations (Postgres 17, self-hosted).
 - `docs/adr/` - architecture decisions.
 - `docs/ops/` - runbooks.
 - `tests/integration/` - cross-language and cross-service tests.

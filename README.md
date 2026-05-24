@@ -14,11 +14,13 @@ Phase 1: Foundation in Arbeit. Siehe `docs/adr/` für Architektur-Entscheidungen
 strota/
   apps/
     web/            Next.js 15 App Router (Vercel, EU-Frankfurt)
-    api-python/     FastAPI (Hetzner Nuremberg, Cloudflare Tunnel)
+    api-python/     FastAPI + Auth + Workers (Hetzner Nuremberg, Cloudflare Tunnel)
   packages/
     shared/         TypeScript types, HMAC, contracts
     corpus/         Regulatorischer Korpus (LBO, BauVorlV, B-Pläne)
     ui/             shared shadcn-basierte UI-Components
+  db/
+    migrations/     Numbered SQL migrations (Postgres 17, self-hosted)
   docs/
     adr/            Architecture Decision Records
     ops/            Runbooks, Outbound-Allowlist, Onboarding
@@ -30,7 +32,8 @@ strota/
 - Node.js >= 20.11 (`nvm use`)
 - pnpm >= 9.0 (`corepack enable && corepack prepare pnpm@9 --activate`)
 - Python >= 3.12 + uv (`pipx install uv`)
-- Docker (für lokales ClamAV, Ghostscript, VeraPDF)
+- Docker (für lokales Postgres + Redis + ClamAV + Ghostscript + VeraPDF)
+- psql (Postgres client)
 
 ## Lokale Entwicklung
 
