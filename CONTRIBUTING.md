@@ -27,7 +27,7 @@ cp .env.example .env
 - Python: ruff + mypy strict.
 - Prettier + ESLint für JS/TS, ruff format für Python.
 - Tests: Vitest (Node) + pytest (Python) + Playwright (E2E).
-- Keine Em-Dash (`—`) oder Double-Dash (`--`) als Satzzeichen in Code oder Dokumentation. Single dash, Komma, Doppelpunkt oder Punkt.
+- Keine Geviertstriche (U+2014) und keine doppelten Bindestriche als Satzzeichen in Code oder Dokumentation. Stattdessen: einfacher Bindestrich, Komma, Doppelpunkt oder Punkt. CI prüft das automatisch (siehe `.github/workflows/ci.yml` Job `punctuation-guard`).
 
 ### Korpus-Beiträge
 

@@ -33,12 +33,30 @@ jobs:
         uses: github/codeql-action/analyze@v3
 
   secret-scan:
-    name: Secret scan (gitleaks)
+    name: Secret scan (gitleaks file-tree)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install gitleaks
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tar.gz \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.21.2/gitleaks_8.21.2_linux_x64.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          sudo mv /tmp/gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Run gitleaks against working tree
+        # --no-git scans the file tree directly. Works on any repo state
+        # (including the initial commit where git log range is undefined).
+        # SARIF report is uploaded so findings surface in the Security tab.
+        run: gitleaks detect --no-git --redact --verbose --report-format sarif --report-path gitleaks.sarif .
+
+      - name: Upload SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: gitleaks.sarif
+          category: gitleaks

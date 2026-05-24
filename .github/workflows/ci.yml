@@ -27,10 +27,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.11
-          cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile=false
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build packages
         run: pnpm build
@@ -103,7 +102,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.11
-          cache: pnpm
 
       - name: Setup Python 3.12
         uses: actions/setup-python@v5
@@ -112,7 +110,7 @@ jobs:
 
       - name: Install Node deps and build shared
         run: |
-          pnpm install --frozen-lockfile=false
+          pnpm install --no-frozen-lockfile
           pnpm --filter @strota/shared build
 
       - name: Install Python uv and api deps
@@ -133,12 +131,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check for em-dash or double-dash in tracked files
+      - name: Check for em-dash in tracked files
         run: |
-          # Exclude lockfiles, vendored content, and markdown YAML frontmatter delimiters.
-          # Double-dash check excludes occurrences inside HTML comments and CLI flags.
           set -euo pipefail
-          PATTERN='—'
+          # Build the pattern from hex bytes so this workflow file itself
+          # contains zero literal em-dash characters (the guard would catch itself).
+          PATTERN=$(printf '\xe2\x80\x94')
           if grep -RIn --binary-files=without-match "$PATTERN" \
             --exclude-dir=node_modules \
             --exclude-dir=.git \

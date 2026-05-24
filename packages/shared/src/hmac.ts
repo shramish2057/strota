@@ -62,15 +62,17 @@ export interface VerifyResult {
     | 'invalid_signature_format';
 }
 
-const HEX_LOWER = '0123456789abcdef';
+const HEX_LOWER = '0123456789abcdef' as const;
 
 function bytesToHex(bytes: Uint8Array): string {
-  let s = '';
+  const out = new Array<string>(bytes.length);
   for (let i = 0; i < bytes.length; i++) {
-    const v = bytes[i]!;
-    s += HEX_LOWER[v >> 4] + HEX_LOWER[v & 15];
+    const v = bytes[i] ?? 0;
+    const hi = HEX_LOWER.charAt(v >> 4);
+    const lo = HEX_LOWER.charAt(v & 0x0f);
+    out[i] = hi + lo;
   }
-  return s;
+  return out.join('');
 }
 
 function toBytes(input: Uint8Array | string): Uint8Array {
@@ -123,7 +125,9 @@ export function generateNonce(): string {
   let b64 = '';
   if (typeof btoa === 'function') {
     let bin = '';
-    for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!);
+    for (let i = 0; i < bytes.length; i++) {
+      bin += String.fromCharCode(bytes[i] ?? 0);
+    }
     b64 = btoa(bin);
   } else {
     // Node fallback
@@ -135,9 +139,7 @@ export function generateNonce(): string {
 /**
  * Sign a request, returning the three headers the API will validate.
  */
-export async function signRequest(
-  options: SignRequestOptions,
-): Promise<HmacSignedRequestHeaders> {
+export async function signRequest(options: SignRequestOptions): Promise<HmacSignedRequestHeaders> {
   if (options.secret.length < 32) {
     throw new Error('HMAC secret must be at least 32 characters.');
   }

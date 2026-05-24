@@ -4,7 +4,7 @@ import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Strota — Bauanträge. Schneller. Vollständig. Eingereicht.',
+    default: 'Strota - Bauanträge. Schneller. Vollständig. Eingereicht.',
     template: '%s | Strota',
   },
   description:

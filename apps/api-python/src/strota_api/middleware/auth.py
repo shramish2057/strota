@@ -16,7 +16,7 @@ Public health endpoints in ``PUBLIC_PATHS`` skip the entire pipeline.
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable
-from typing import Any
+from typing import Any, cast
 
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
@@ -100,7 +100,7 @@ class HmacAuthMiddleware(BaseHTTPMiddleware):
         # Re-inject body so downstream handlers can read it again.
         # Starlette's BaseHTTPMiddleware does not preserve body across `await request.body()`,
         # so we wrap the receive callable.
-        request._receive = self._replay_body_receive(body)  # type: ignore[attr-defined]
+        request._receive = self._replay_body_receive(body)
 
         return await call_next(request)
 
@@ -125,8 +125,11 @@ class HmacAuthMiddleware(BaseHTTPMiddleware):
             # In test/in-memory mode there is no CRL; treat as not revoked.
             return False
         client = store._client  # noqa: SLF001 - same-package helper access
-        member = await client.sismember(self._settings.mtls_crl_redis_key, fingerprint)
-        return bool(member)
+        # redis-py types sismember as a union of sync int and awaitable for
+        # client-mode overloading. The asyncio client always returns the
+        # awaitable; we cast so mypy strict accepts the await.
+        coro = cast(Awaitable[int], client.sismember(self._settings.mtls_crl_redis_key, fingerprint))
+        return bool(await coro)
 
     @staticmethod
     def _replay_body_receive(body: bytes) -> Callable[[], Awaitable[dict[str, Any]]]:
