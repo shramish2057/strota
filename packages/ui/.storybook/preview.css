@@ -1,0 +1,53 @@
+/* Strota tokens for Storybook. Mirrors apps/web/src/styles/globals.css.
+   Storybook stories use Tailwind class names; we ship the tokens as plain CSS
+   variables here, and apply the utility-level rules via a tiny manual stylesheet
+   so we don't need a full Tailwind build inside Storybook. */
+
+:root {
+  --color-bg-base: #f8f7f5;
+  --color-bg-subtle: #f1efe9;
+  --color-bg-elevated: #ffffff;
+  --color-bg-inverse: #111827;
+
+  --color-primary-900: #0f2540;
+  --color-primary-800: #1a3a5c;
+  --color-primary-700: #1e4a73;
+  --color-primary-600: #245c8c;
+  --color-primary-500: #2e72a8;
+  --color-primary-400: #4d8fbf;
+  --color-primary-100: #e8f1f9;
+  --color-primary-50: #f2f7fc;
+
+  --color-accent-700: #92610d;
+  --color-accent-600: #b07a14;
+  --color-accent-500: #c8921a;
+  --color-accent-400: #d4a43c;
+  --color-accent-100: #fdf3dc;
+
+  --color-neutral-900: #111827;
+  --color-neutral-700: #374151;
+  --color-neutral-500: #6b7280;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-100: #f3f4f6;
+
+  --color-success-700: #14532d;
+  --color-success-600: #166534;
+  --color-success-100: #dcfce7;
+  --color-warning-700: #92400e;
+  --color-warning-500: #b45309;
+  --color-warning-100: #fef3c7;
+  --color-error-700: #7f1d1d;
+  --color-error-600: #991b1b;
+  --color-error-100: #fee2e2;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-neutral-900);
+  background-color: var(--color-bg-base);
+}
