@@ -82,5 +82,7 @@ function badgeTone(badge: NavBadge):
       return 'neutral';
     case 'Kostenlos':
       return 'accent';
+    case 'KI':
+      return 'primary';
   }
 }
