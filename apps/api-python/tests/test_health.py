@@ -31,6 +31,9 @@ def test_readyz_returns_ready(client: TestClient) -> None:
 
 
 def test_unauthenticated_protected_path_returns_401(client: TestClient) -> None:
-    """Until Commit 5 lands, any non-public path returns 401 from the auth stub."""
-    response = client.get("/api/protected/example")
+    """Non-public paths require HMAC headers. Missing headers => 401."""
+    response = client.get("/internal/echo")
     assert response.status_code == 401
+    # `missing_header` from the HMAC verifier, or `method_not_allowed` if the
+    # route only allows POST; this test confirms the auth middleware ran first.
+    assert response.json()["error"] in {"missing_header", "method_not_allowed"}
