@@ -1,0 +1,37 @@
+# Lightweight Postgres for schema iteration and CI migration smoke tests.
+# Production Supabase runs in EU-Frankfurt; this is for local-only validation.
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: strota-postgres
+    ports:
+      - '54322:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: strota_dev
+      POSTGRES_DB: strota
+    volumes:
+      - strota_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d strota']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: strota-redis
+    ports:
+      - '6379:6379'
+    command: ['redis-server', '--appendonly', 'yes', '--maxmemory-policy', 'noeviction']
+    volumes:
+      - strota_redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  strota_pgdata:
+  strota_redisdata:
