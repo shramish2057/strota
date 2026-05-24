@@ -1,0 +1,90 @@
+{
+  "common": {
+    "appName": "Strota",
+    "tagline": "Building permits. Faster. Complete. Filed.",
+    "subTagline": "No more requests for additional documents.",
+    "loading": "Loading ...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "open": "Open",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "projekte": "Projects",
+    "pruefen": "Check",
+    "briefe": "Letters",
+    "einstellungen": "Settings",
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open navigation",
+    "closeMenu": "Close navigation",
+    "notifications": "Notifications",
+    "account": "Account"
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Sign in with your email and password.",
+    "signupTitle": "Create account",
+    "signupSubtitle": "Strota is for professional building-permit applicants. Create your account in two steps.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "name@example.com",
+    "passwordLabel": "Password",
+    "passwordHint": "At least 12 characters.",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "Jane Example",
+    "loginButton": "Sign in",
+    "signupButton": "Create account",
+    "loginViaMagicLink": "Email me a sign-in link",
+    "forgotPassword": "Forgot your password?",
+    "switchToSignup": "No account yet? Create one",
+    "switchToLogin": "Already have an account? Sign in",
+    "verifyEmailTitle": "Verify your email",
+    "verifyEmailSubtitle": "We sent you a confirmation link. Please open it within 24 hours.",
+    "passwordResetTitle": "Reset password",
+    "passwordResetSubtitle": "Enter your email; we will send you a reset link.",
+    "passwordResetSent": "If an account exists for that address, we sent you a link.",
+    "magicLinkSent": "If an account exists for that address, we sent you a sign-in link.",
+    "logout": "Sign out",
+    "errorInvalidCredentials": "Email or password is not correct.",
+    "errorAccountLocked": "Account temporarily locked. Try again in 15 minutes or reset your password.",
+    "errorEmailAlreadyRegistered": "An account with this email already exists.",
+    "errorPasswordTooShort": "Password must be at least 12 characters.",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
+  "home": {
+    "heroQuestion": "Do you need a building permit?",
+    "heroSubtitle": "Enter an address and find out in 30 seconds which permit procedure applies.",
+    "heroSubmit": "Check for free",
+    "heroNoAccount": "No account required.",
+    "heroExamples": "Examples: covered terrace, garage, new single-family home, extension",
+    "entryGenehmigungsfrei": {
+      "title": "Permit-free checker",
+      "subtitle": "Do I need a permit?",
+      "cta": "Free"
+    },
+    "entryUnterlagenliste": {
+      "title": "Document list",
+      "subtitle": "What do I need to file?",
+      "cta": "14-day trial"
+    },
+    "entryDokumentanalyse": {
+      "title": "Analyze document",
+      "subtitle": "What does this letter mean?",
+      "cta": "Upload"
+    },
+    "trustGeprueftVonArchitekten": "Reviewed by architects",
+    "footerCta": "Prepare permit applications that get approved the first time.",
+    "footerCtaButton": "Start 14-day free trial",
+    "footerCtaSub": "No credit card required."
+  },
+  "phase": {
+    "label": "Phase 3 Foundation",
+    "appStatusShort": "Platform in development. Permit-free checker goes live in Phase 3.5."
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "common": {
+    "appName": "Strota",
+    "tagline": "Bauanträge. Schneller. Vollständig. Eingereicht.",
+    "subTagline": "Kein Nachfordern mehr.",
+    "loading": "Wird geladen ...",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "submit": "Absenden",
+    "back": "Zurück",
+    "next": "Weiter",
+    "open": "Öffnen",
+    "close": "Schließen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "search": "Suchen"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "projekte": "Projekte",
+    "pruefen": "Prüfen",
+    "briefe": "Briefe",
+    "einstellungen": "Einstellungen",
+    "skipToContent": "Zum Hauptinhalt springen",
+    "openMenu": "Navigation öffnen",
+    "closeMenu": "Navigation schließen",
+    "notifications": "Benachrichtigungen",
+    "account": "Konto"
+  },
+  "auth": {
+    "loginTitle": "Anmelden",
+    "loginSubtitle": "Mit Ihrer E-Mail-Adresse und Passwort anmelden.",
+    "signupTitle": "Konto erstellen",
+    "signupSubtitle": "Strota ist für berufsmäßige Bauantragsteller. Erstellen Sie ein Konto in zwei Schritten.",
+    "emailLabel": "E-Mail-Adresse",
+    "emailPlaceholder": "name@beispiel.de",
+    "passwordLabel": "Passwort",
+    "passwordHint": "Mindestens 12 Zeichen.",
+    "fullNameLabel": "Vor- und Nachname",
+    "fullNamePlaceholder": "Anna Beispiel",
+    "loginButton": "Anmelden",
+    "signupButton": "Konto erstellen",
+    "loginViaMagicLink": "Anmeldelink per E-Mail",
+    "forgotPassword": "Passwort vergessen?",
+    "switchToSignup": "Noch kein Konto? Konto erstellen",
+    "switchToLogin": "Schon ein Konto? Anmelden",
+    "verifyEmailTitle": "E-Mail-Adresse bestätigen",
+    "verifyEmailSubtitle": "Wir haben Ihnen einen Bestätigungs-Link gesendet. Bitte öffnen Sie den Link in den nächsten 24 Stunden.",
+    "passwordResetTitle": "Passwort zurücksetzen",
+    "passwordResetSubtitle": "Geben Sie Ihre E-Mail-Adresse an; wir senden Ihnen einen Link zum Zurücksetzen.",
+    "passwordResetSent": "Falls ein Konto mit dieser Adresse existiert, haben wir Ihnen einen Link geschickt.",
+    "magicLinkSent": "Falls ein Konto mit dieser Adresse existiert, haben wir Ihnen einen Anmeldelink geschickt.",
+    "logout": "Abmelden",
+    "errorInvalidCredentials": "E-Mail-Adresse oder Passwort sind nicht korrekt.",
+    "errorAccountLocked": "Konto vorübergehend gesperrt. Bitte versuchen Sie es in 15 Minuten erneut oder setzen Sie Ihr Passwort zurück.",
+    "errorEmailAlreadyRegistered": "Mit dieser E-Mail-Adresse existiert bereits ein Konto.",
+    "errorPasswordTooShort": "Passwort muss mindestens 12 Zeichen lang sein.",
+    "errorGeneric": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "home": {
+    "heroQuestion": "Brauchen Sie einen Bauantrag?",
+    "heroSubtitle": "Adresse eingeben und in 30 Sekunden erfahren, welches Genehmigungsverfahren gilt.",
+    "heroSubmit": "Kostenlos prüfen",
+    "heroNoAccount": "Kein Konto erforderlich.",
+    "heroExamples": "Beispiele: Terrassenüberdachung · Garage · Neubau EFH · Anbau",
+    "entryGenehmigungsfrei": {
+      "title": "Genehmigungsfrei-Prüfer",
+      "subtitle": "Brauche ich einen Antrag?",
+      "cta": "Kostenlos"
+    },
+    "entryUnterlagenliste": {
+      "title": "Unterlagenliste erstellen",
+      "subtitle": "Was muss ich einreichen?",
+      "cta": "14 Tage testen"
+    },
+    "entryDokumentanalyse": {
+      "title": "Dokument analysieren",
+      "subtitle": "Was bedeutet dieser Brief?",
+      "cta": "Hochladen"
+    },
+    "trustGeprueftVonArchitekten": "Geprüft von Architekten",
+    "footerCta": "Bauanträge vorbereiten, die beim ersten Mal genehmigt werden.",
+    "footerCtaButton": "14 Tage kostenlos testen",
+    "footerCtaSub": "Keine Kreditkarte erforderlich."
+  },
+  "phase": {
+    "label": "Phase 3 Foundation",
+    "appStatusShort": "Plattform im Aufbau. Genehmigungsfrei-Prüfer geht Phase 3.5 live."
+  }
+}

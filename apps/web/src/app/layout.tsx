@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import { CookieConsent } from '../components/cookie-consent';
 import { SiteFooter } from '../components/site-footer';
@@ -25,20 +27,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
   return (
     <html
-      lang="de"
+      lang={locale}
       suppressHydrationWarning
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
     >
       <body>
-        <a href="#main" className="skip-link">
-          Zum Hauptinhalt springen
-        </a>
-        <main id="main">{children}</main>
-        <SiteFooter />
-        <CookieConsent />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <a href="#main" className="skip-link">
+            Zum Hauptinhalt springen
+          </a>
+          <main id="main">{children}</main>
+          <SiteFooter />
+          <CookieConsent />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
