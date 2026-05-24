@@ -11,7 +11,7 @@ import { StrotaWordmark } from './wordmark';
 export function SiteNav(): JSX.Element {
   const [openLabel, setOpenLabel] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<HTMLElement | null>(null);
 
   const closeAll = useCallback(() => {
     setOpenLabel(null);
@@ -33,9 +33,15 @@ export function SiteNav(): JSX.Element {
     };
   }, [closeAll]);
 
+  const activeCategory: NavCategory | null =
+    CATEGORIES.find((cat) => cat.label === openLabel) ?? null;
+
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-bg-elevated/95 backdrop-blur">
-      <div ref={rootRef} className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 lg:px-8">
+    <header
+      ref={rootRef}
+      className="sticky top-0 z-40 border-b border-neutral-200 bg-bg-elevated/95 backdrop-blur"
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 lg:px-8">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center" aria-label="Strota Startseite">
             <StrotaWordmark className="h-7 w-auto text-primary-900" />
@@ -44,17 +50,16 @@ export function SiteNav(): JSX.Element {
             {CATEGORIES.map((cat) => (
               <CategoryTrigger
                 key={cat.label}
-                category={cat}
+                label={cat.label}
                 isOpen={openLabel === cat.label}
                 onToggle={() => setOpenLabel(openLabel === cat.label ? null : cat.label)}
-                onClose={closeAll}
               />
             ))}
             {PRIMARY_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-sm px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-primary-50 hover:text-primary-800"
+                className="rounded-md px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-primary-50 hover:text-primary-800"
               >
                 {link.label}
               </Link>
@@ -66,25 +71,23 @@ export function SiteNav(): JSX.Element {
           <LocaleSwitcher />
           <Link
             href="/demo"
-            className="hidden rounded-sm px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-primary-50 hover:text-primary-800 md:inline-flex"
+            className="hidden rounded-md px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-primary-50 hover:text-primary-800 md:inline-flex"
           >
             Demo buchen
           </Link>
           <Link
             href="/login"
-            className="hidden rounded-sm border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-100 md:inline-flex"
+            className="hidden rounded-md border border-neutral-300 px-3 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-100 md:inline-flex"
           >
             Anmelden
           </Link>
           <Link href="/signup" className="hidden md:inline-flex">
-            <Button size="sm" variant="accent">
-              Kostenlos starten
-            </Button>
+            <Button size="sm">Kostenlos starten</Button>
           </Link>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-neutral-300 text-neutral-900 lg:hidden"
-            aria-label="Menü öffnen"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-neutral-300 text-neutral-900 lg:hidden"
+            aria-label="Menue oeffnen"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(true)}
           >
@@ -94,49 +97,53 @@ export function SiteNav(): JSX.Element {
           </button>
         </div>
       </div>
+
+      {activeCategory ? (
+        <div className="absolute left-0 right-0 top-full z-40 border-b border-neutral-200 bg-bg-elevated shadow-lg">
+          <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 lg:py-10">
+            <MegaMenu category={activeCategory} onItemClick={closeAll} />
+          </div>
+        </div>
+      ) : null}
+
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
   );
 }
 
 function CategoryTrigger({
-  category,
+  label,
   isOpen,
   onToggle,
-  onClose,
 }: {
-  category: NavCategory;
+  label: string;
   isOpen: boolean;
   onToggle: () => void;
-  onClose: () => void;
 }): JSX.Element {
   return (
-    <div className="relative">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-        className={`inline-flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
-          isOpen
-            ? 'bg-primary-50 text-primary-800'
-            : 'text-neutral-700 hover:bg-primary-50 hover:text-primary-800'
-        }`}
-      >
-        {category.label}
-        <span aria-hidden className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>
-          ▾
-        </span>
-      </button>
-      {isOpen ? <MegaMenu category={category} onItemClick={onClose} /> : null}
-    </div>
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={isOpen}
+      aria-haspopup="true"
+      className={`inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+        isOpen
+          ? 'bg-primary-50 text-primary-800'
+          : 'text-neutral-700 hover:bg-primary-50 hover:text-primary-800'
+      }`}
+    >
+      {label}
+      <span aria-hidden className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+        ▾
+      </span>
+    </button>
   );
 }
 
 function LocaleSwitcher(): JSX.Element {
   return (
-    <div className="hidden items-center gap-1 rounded-sm border border-neutral-200 px-2 py-1 font-mono text-xs uppercase text-neutral-700 md:inline-flex">
-      <span className="font-semibold text-primary-700">DE</span>
+    <div className="hidden items-center gap-1 rounded-md border border-neutral-200 px-2 py-1 text-xs font-semibold uppercase tracking-wider text-neutral-700 md:inline-flex">
+      <span className="text-primary-700">DE</span>
       <span aria-hidden className="text-neutral-300">
         |
       </span>

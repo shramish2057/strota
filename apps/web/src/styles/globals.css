@@ -46,12 +46,14 @@
     --color-error-600: #991b1b;
     --color-error-100: #fee2e2;
 
-    /* Typography: next/font sets --font-display, --font-body, --font-mono on
-       <html> via the variable property. We mirror them as fallbacks in case
-       next/font fails to load (offline dev) or the variables are not yet set. */
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* Typography: one face (Geist Sans) for everything visible, Geist Mono for
+       numbers and code. Geist is injected on <html> by next/font via the geist
+       npm package, which exposes --font-geist-sans and --font-geist-mono. We
+       alias them to our semantic tokens so Tailwind utilities (font-display,
+       font-body, font-mono) continue to resolve. */
+    --font-display: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   }
 
   [data-theme='dark'] {
@@ -91,9 +93,23 @@
     background-color: var(--color-bg-base);
     color: var(--color-neutral-900);
     font-family: var(--font-body);
-    font-feature-settings: 'kern' 1;
+    font-feature-settings: 'kern' 1, 'ss01' 1, 'cv11' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headlines: Geist Sans + heavy weight + tight tracking. Applied via the
+     `font-display` token class so existing markup stays the same while the
+     look shifts from elegant-serif (old) to engineering-grotesk (new). */
+  .font-display {
+    font-weight: 700;
+    letter-spacing: -0.022em;
+  }
+  h1.font-display,
+  .font-display.text-6xl,
+  .font-display.text-5xl {
+    font-weight: 800;
+    letter-spacing: -0.028em;
   }
 
   /* Tabular numerals everywhere numbers appear in tables */

@@ -1,15 +1,28 @@
 /**
- * Top-nav information architecture for Strota's marketing site.
- * Organized around the three German Bauantrags-Lebenszyklen: Planen, Sanieren,
- * Umbauen. Every label and item description is written in Strota's own voice;
- * scope claims are kept honest (Bayern live; other Länder are roadmap).
+ * Strota site-nav information architecture, derived from the v5.0 Product Bible.
+ * Top-level axis = customer lifecycle (Planen / Sanieren / Umbauen). Each
+ * dropdown lists the actual product surfaces (S1..S4) and workflow modules
+ * (M0..M8) the bible defines, scoped to the lifecycle where they are most
+ * load-bearing. A separate Tools dropdown surfaces the four free public
+ * surfaces regardless of lifecycle. Behoerden lives inside Ressourcen.
+ *
+ * Status discipline: every item carries a status badge derived from the
+ * phase-plan. Live = Phase 3.5 ready in Bayern. Bayern = corpus-complete for
+ * Bayern only. Beta = behind feature flag. Roadmap = not yet shipped.
  */
+
+export type NavBadge = 'Live' | 'Bayern' | 'Beta' | 'Roadmap' | 'Kostenlos';
 
 export type NavItem = {
   title: string;
   href: string;
   description: string;
-  badge?: 'Live' | 'Bayern' | 'Beta' | 'Roadmap';
+  badge?: NavBadge;
+};
+
+export type NavGroup = {
+  heading: string;
+  items: NavItem[];
 };
 
 export type NavCategory = {
@@ -20,227 +33,355 @@ export type NavCategory = {
     headline: string;
     body: string;
   };
-  groups: { heading: string; items: NavItem[] }[];
+  groups: NavGroup[];
   cta: { label: string; href: string };
 };
+
+/* -------------------------------------------------------------------------- */
+/* PLANEN — Neubau, EFH/MFH, Gewerbe, Sonderbau                               */
+/* -------------------------------------------------------------------------- */
 
 export const PLANEN: NavCategory = {
   label: 'Planen',
   href: '/planen',
   intro: {
-    eyebrow: 'Neubau und Erstprojekte',
-    headline: 'Vom Grundstück bis zur Einreichung',
-    body: 'Verfahren bestimmen, Unterlagen prüfen, qeS-signiert einreichen. Heute live für Bayern.',
+    eyebrow: 'Neubau & Erstprojekte',
+    headline: 'Vom Grundstueck bis zur qeS-Einreichung',
+    body: 'EFH, MFH, Gewerbe, Sonderbau. Strota fuehrt das gesamte Verfahren von der Standortfrage bis zur signierten Einreichung.',
   },
   groups: [
     {
-      heading: 'Werkzeuge',
+      heading: 'Vor der Antragstellung',
       items: [
         {
-          title: 'Genehmigungsfrei-Prüfer',
-          href: '/planen/genehmigungsfrei',
-          description: 'In 60 Sekunden klären, ob Ihr Vorhaben überhaupt einen Antrag braucht.',
-          badge: 'Live',
+          title: 'Genehmigungsfrei-Pruefer',
+          href: '/genehmigungsfrei',
+          description: 'In 30 Sekunden klaeren, ob das Vorhaben antragspflichtig ist.',
+          badge: 'Kostenlos',
         },
         {
           title: 'Verfahrensbestimmung',
-          href: '/planen/verfahren',
-          description: 'Vereinfacht, Genehmigungsfrei oder Voll: deterministisch entschieden.',
+          href: '/plattform/verfahrensbestimmung',
+          description: 'Genehmigungsfreistellung, vereinfachtes, volles oder Sonderbauverfahren, deterministisch entschieden.',
           badge: 'Bayern',
         },
         {
-          title: 'Vollständigkeitsprüfung',
-          href: '/planen/vollstaendigkeit',
-          description: 'Jedes Pflicht-Dokument der BauVorlV im Blick, bevor Sie einreichen.',
+          title: 'B-Plan-Analyzer',
+          href: '/plattform/bplan-analyzer',
+          description: 'GRZ, GFZ, Trauf- und Firsthoehe, Abstandsflaechen gegen den B-Plan abgleichen.',
           badge: 'Bayern',
         },
         {
-          title: 'Dokument-Analyse',
-          href: '/planen/analyse',
-          description: 'Pläne, Berechnungen, Nachweise: KI prüft auf Schlüssigkeit.',
-          badge: 'Beta',
+          title: 'Anforderungs-Mapper',
+          href: '/plattform/anforderungs-mapper',
+          description: 'Pflicht-Dokumente aus BauVorlV und Land-Spezifika fuer Ihr Vorhaben ableiten.',
+          badge: 'Bayern',
         },
       ],
     },
     {
-      heading: 'Einreichung',
+      heading: 'Antrag erstellen & einreichen',
       items: [
         {
-          title: 'qeS-Signatur',
-          href: '/planen/qes',
-          description: 'Qualifiziert elektronisch signieren, kompatibel mit eIDAS.',
-          badge: 'Live',
+          title: 'Baubeschreibungs-Generator',
+          href: '/plattform/baubeschreibung',
+          description: 'KI-gestuetzt, paragraphengenau zitiert, mit Architekten-Confirmation-Gate.',
+          badge: 'Beta',
         },
         {
-          title: 'Digitaler Bauantrag',
-          href: '/planen/einreichung',
-          description: 'Direkt an den BayernPortal-Workflow oder XBau-Schnittstelle.',
+          title: 'Vollstaendigkeitspruefer',
+          href: '/plattform/vollstaendigkeit',
+          description: 'Schicht 1 bis 4: Praesenz, Format, Inhalt, Fachpruefung. Confidence Score pro Dokument.',
           badge: 'Bayern',
         },
         {
-          title: 'Bauvorlageberechtigung',
-          href: '/planen/bvb-check',
-          description: 'Prüfung gegen Listen der Architekten- und Ingenieurkammern.',
+          title: 'qeS-Einreichung',
+          href: '/plattform/qes',
+          description: 'eIDAS-qualifiziert, PAdES-LTV, Mehrpersonen-Workflow fuer Bauherrengemeinschaft.',
+          badge: 'Beta',
+        },
+        {
+          title: 'Kalkulationen & Baugebuehren',
+          href: '/plattform/kalkulationen',
+          description: 'HOAI-Honorar, Baugebuehren je Bauamt, Stellplatzabloese, Baulastenauskunft.',
+          badge: 'Roadmap',
         },
       ],
     },
   ],
-  cta: { label: 'Projekt anlegen', href: '/signup' },
+  cta: { label: 'Neubau-Projekt anlegen', href: '/signup?intent=planen' },
 };
+
+/* -------------------------------------------------------------------------- */
+/* SANIEREN — Bestand, Energie, Denkmal                                       */
+/* -------------------------------------------------------------------------- */
 
 export const SANIEREN: NavCategory = {
   label: 'Sanieren',
   href: '/sanieren',
   intro: {
     eyebrow: 'Bestand, Energie, Denkmal',
-    headline: 'Sanierungspflichten klar beantwortet',
-    body: 'GEG, Denkmalschutz, Förderprogramme: aufeinander abgestimmt geprüft.',
+    headline: 'Sanierungspflichten ohne Ueberraschungen',
+    body: 'GEG, Denkmalschutz, BEG-Foerderung: aufeinander abgestimmt geprueft, bevor Sie ein Angebot abgeben.',
   },
   groups: [
     {
       heading: 'Pflichten erkennen',
       items: [
         {
+          title: 'Genehmigungsfrei-Pruefer',
+          href: '/genehmigungsfrei?intent=sanieren',
+          description: 'Viele Sanierungsmassnahmen sind verfahrensfrei. Strota klaert es in 30 Sekunden.',
+          badge: 'Kostenlos',
+        },
+        {
+          title: 'Dokument-Analyse',
+          href: '/analyse',
+          description: 'Alte Baugenehmigung, GEG-Bescheid oder Energieausweis hochladen, Strota liest.',
+          badge: 'Kostenlos',
+        },
+        {
           title: 'GEG-Sanierungspflicht-Check',
           href: '/sanieren/geg',
-          description: 'Welche Modernisierungspflichten greifen bei Eigentümerwechsel oder Umbau?',
+          description: 'Welche Modernisierungspflichten greifen nach Eigentuemerwechsel oder Umbau?',
           badge: 'Roadmap',
         },
         {
-          title: 'Denkmalschutz-Hinweis',
-          href: '/sanieren/denkmal',
-          description: 'Liegt Ihr Objekt im Denkmalbestand oder Ensemble? Was bedeutet das?',
-          badge: 'Roadmap',
-        },
-        {
-          title: 'Energieausweis-Pflicht',
-          href: '/sanieren/energieausweis',
-          description: 'Klarheit, wann ein Energieausweis verpflichtend wird.',
-          badge: 'Roadmap',
+          title: 'Begleitende Genehmigungen',
+          href: '/plattform/begleitende-genehmigungen',
+          description: 'Denkmalschutz, Wasserrecht, Naturschutz: parallele Verfahren sichtbar machen.',
+          badge: 'Bayern',
         },
       ],
     },
     {
-      heading: 'Förderung und Partner',
+      heading: 'Planen, foerdern, dokumentieren',
       items: [
         {
-          title: 'Förderprogramm-Finder',
+          title: 'Vollstaendigkeitspruefer',
+          href: '/plattform/vollstaendigkeit?intent=sanieren',
+          description: 'GEG-Nachweise, EnEV-Berechnungen, Bestandsdokumentation auf Vollstaendigkeit.',
+          badge: 'Bayern',
+        },
+        {
+          title: 'Foerderprogramm-Finder',
           href: '/sanieren/foerderung',
-          description: 'BEG, KfW, Länderprogramme: für Ihr konkretes Vorhaben gefiltert.',
+          description: 'BEG, KfW, Laender-Programme: nach Ihrem Vorhaben gefiltert, mit Antragspfad.',
           badge: 'Roadmap',
         },
         {
-          title: 'Energieberater-Verzeichnis',
-          href: '/sanieren/energieberater',
-          description: 'Zertifizierte Beraterinnen und Berater in Ihrer Region.',
+          title: 'Post-Approval & Bautagebuch',
+          href: '/plattform/post-approval',
+          description: 'Geltungsdauer-Countdowns, Foerderbescheid-Fristen, Tekturplan.',
+          badge: 'Roadmap',
+        },
+        {
+          title: 'Standardschreiben & Nachbarbeteiligung',
+          href: '/plattform/standardschreiben',
+          description: 'Geruestaufbau-Anzeige, Nachbar-Zustimmung, Bauamt-Korrespondenz.',
           badge: 'Roadmap',
         },
       ],
     },
   ],
-  cta: { label: 'Frühen Zugang anfragen', href: '/signup?intent=sanieren' },
+  cta: { label: 'Sanierungs-Projekt anlegen', href: '/signup?intent=sanieren' },
 };
+
+/* -------------------------------------------------------------------------- */
+/* UMBAUEN — Anbau, Aufstockung, Nutzungsaenderung, Abbruch                   */
+/* -------------------------------------------------------------------------- */
 
 export const UMBAUEN: NavCategory = {
   label: 'Umbauen',
   href: '/umbauen',
   intro: {
-    eyebrow: 'Anbau, Aufstockung, Nutzungsänderung',
-    headline: 'Bestehende Gebäude weiterdenken',
-    body: 'Klärung, ob ein Bauantrag nötig wird, welche Auflagen greifen und welche Nachweise fehlen.',
+    eyebrow: 'Anbau, Aufstockung, Nutzungsaenderung',
+    headline: 'Bestandsgebaeude weiterdenken',
+    body: 'Klarheit, ob ueberhaupt ein Antrag noetig wird, welche Auflagen greifen, welche Nachweise fehlen.',
   },
   groups: [
     {
-      heading: 'Vorhaben prüfen',
+      heading: 'Vorhaben einordnen',
       items: [
         {
-          title: 'Nutzungsänderung-Prüfer',
-          href: '/umbauen/nutzungsaenderung',
-          description: 'Vom Büro zur Wohnung, von Lager zu Werkstatt: Folgen aus BauO und BauNVO.',
-          badge: 'Roadmap',
+          title: 'Genehmigungsfrei-Pruefer',
+          href: '/genehmigungsfrei?intent=umbauen',
+          description: 'Anbau, Garage, Carport, Wintergarten: oft verfahrensfrei unter Schwellenwerten.',
+          badge: 'Kostenlos',
         },
         {
-          title: 'Anbau und Aufstockung',
-          href: '/umbauen/anbau',
-          description: 'Maße, Grenzabstände, Statik-Voranzeige.',
-          badge: 'Roadmap',
+          title: 'Verfahrensbestimmung mit Nutzungsaenderung',
+          href: '/plattform/verfahrensbestimmung?intent=umbauen',
+          description: 'Nutzungsaenderung Buero zu Wohnen kann Sonderbau ausloesen. Strota erkennt das.',
+          badge: 'Bayern',
         },
         {
-          title: 'Innen-Umbau',
-          href: '/umbauen/innen',
-          description: 'Wann tragender Eingriff, wann genehmigungsfrei?',
-          badge: 'Roadmap',
+          title: 'B-Plan-Analyzer mit §31 Abweichung',
+          href: '/plattform/bplan-analyzer?modus=abweichung',
+          description: 'Befreiung versus Ausnahme nach §31 BauGB, sauber getrennt.',
+          badge: 'Bayern',
+        },
+        {
+          title: 'Dokument-Analyse',
+          href: '/analyse?intent=umbauen',
+          description: 'Alte Baugenehmigung interpretieren, bevor Sie in den Bestand eingreifen.',
+          badge: 'Kostenlos',
         },
       ],
     },
     {
-      heading: 'Pflichtnachweise',
+      heading: 'Auflagen und Nachbarn',
       items: [
         {
-          title: 'Brandschutz-Anforderungen',
-          href: '/umbauen/brandschutz',
-          description: 'F-90, Rettungswege, Brandwand: was Ihr Vorhaben auslöst.',
+          title: 'Vollstaendigkeitspruefer fuer Umbau',
+          href: '/plattform/vollstaendigkeit?intent=umbauen',
+          description: 'Brandschutzkonzept, Statik-Voranzeige, Bestandsplaene: was bei Eingriff noetig wird.',
+          badge: 'Bayern',
+        },
+        {
+          title: 'Standardschreiben & Nachbarbeteiligung',
+          href: '/plattform/standardschreiben',
+          description: 'Nachbar-Unterschriftensammlung, Anhoerungsbriefe, Vorbescheids-Antrag §71.',
           badge: 'Roadmap',
         },
         {
-          title: 'Statik-Voranzeige',
-          href: '/umbauen/statik',
-          description: 'Wann ein Standsicherheitsnachweis verpflichtend wird.',
+          title: 'Baubeschreibungs-Generator',
+          href: '/plattform/baubeschreibung?intent=umbauen',
+          description: 'Beschreibung der Aenderung mit Bezug auf Bestandsdokumentation.',
+          badge: 'Beta',
+        },
+        {
+          title: 'Begleitende Genehmigungen',
+          href: '/plattform/begleitende-genehmigungen?intent=umbauen',
+          description: 'Wasserrecht beim Abbruch, Naturschutz bei Aufstockung, Immissionsschutz.',
+          badge: 'Bayern',
+        },
+      ],
+    },
+  ],
+  cta: { label: 'Umbau-Projekt anlegen', href: '/signup?intent=umbauen' },
+};
+
+/* -------------------------------------------------------------------------- */
+/* TOOLS — die vier freien public surfaces (S1..S4) plus Bibliothek + Q&A     */
+/* -------------------------------------------------------------------------- */
+
+export const TOOLS: NavCategory = {
+  label: 'Tools',
+  href: '/tools',
+  intro: {
+    eyebrow: 'Kostenlose Werkzeuge',
+    headline: 'Vier oeffentliche Werkzeuge, kein Konto noetig',
+    body: 'Strota-Hauptfunktionen als oeffentliche Surfaces. Reichen fuer 80 % der Fragen, die in Architekturbueros taeglich aufschlagen.',
+  },
+  groups: [
+    {
+      heading: 'Pruefen & analysieren',
+      items: [
+        {
+          title: 'Genehmigungsfrei-Pruefer',
+          href: '/genehmigungsfrei',
+          description: 'Adresse plus Vorhaben: in 30 Sekunden Verfahrensfreiheit klaeren.',
+          badge: 'Kostenlos',
+        },
+        {
+          title: 'Strota Fragt',
+          href: '/fragen',
+          description: 'Baurechts-Fragen mit Paragraph-Zitat. Keine Halluzination, jede Antwort verlinkt.',
+          badge: 'Beta',
+        },
+        {
+          title: 'Dokument-Analyse',
+          href: '/analyse',
+          description: 'Nachforderungsschreiben, B-Plan, Satzung hochladen: Strota analysiert.',
+          badge: 'Kostenlos',
+        },
+      ],
+    },
+    {
+      heading: 'Wissen & Bibliothek',
+      items: [
+        {
+          title: 'Bibliothek',
+          href: '/bibliothek',
+          description: 'LBO, BauVorlV, Satzungen je Gemeinde. Strukturiert, zitierbar, mit Stand-Datum.',
+          badge: 'Bayern',
+        },
+        {
+          title: 'Vorlagen & Checklisten',
+          href: '/bibliothek/vorlagen',
+          description: 'Antragsformulare, Pflichtdokumente, Stempel- und Briefkopf-Templates.',
+          badge: 'Roadmap',
+        },
+        {
+          title: 'Glossar',
+          href: '/bibliothek/glossar',
+          description: 'GRZ, GFZ, Vollgeschoss, qeS: Bauantrags-Begriffe nuechtern erklaert.',
           badge: 'Roadmap',
         },
       ],
     },
   ],
-  cta: { label: 'Frühen Zugang anfragen', href: '/signup?intent=umbauen' },
+  cta: { label: 'Alle Tools ansehen', href: '/tools' },
 };
+
+/* -------------------------------------------------------------------------- */
+/* RESSOURCEN — Blog, Webinare, Roadmap, Strota Kommune (B2G), Status         */
+/* -------------------------------------------------------------------------- */
 
 export const RESSOURCEN: NavCategory = {
   label: 'Ressourcen',
   href: '/ressourcen',
   intro: {
-    eyebrow: 'Wissen und Werkzeuge',
-    headline: 'Bauantragswissen für die Praxis',
-    body: 'Bibliothek, Blog, Vorlagen und Webinare: für Architektinnen, Planer und Behörden.',
+    eyebrow: 'Lesen, lernen, integrieren',
+    headline: 'Bauantragswissen fuer die Praxis',
+    body: 'Blog, Webinare, Produkt-Roadmap, Status-Seite. Plus Strota Kommune fuer Bauaufsichtsbehoerden.',
   },
   groups: [
     {
-      heading: 'Bibliothek',
-      items: [
-        {
-          title: 'BauO-Bibliothek',
-          href: '/ressourcen/bibliothek',
-          description: 'Volltext-Suche über Landesbauordnungen, DVO und Satzungen.',
-          badge: 'Bayern',
-        },
-        {
-          title: 'Vorlagen und Checklisten',
-          href: '/ressourcen/vorlagen',
-          description: 'Pflichtdokumente, Antragsformulare, Bauvorlagen.',
-        },
-        {
-          title: 'Glossar',
-          href: '/ressourcen/glossar',
-          description: 'Bauantrags-Begriffe verständlich erklärt.',
-        },
-      ],
-    },
-    {
-      heading: 'Lesen und lernen',
+      heading: 'Lernen',
       items: [
         {
           title: 'Blog',
           href: '/ressourcen/blog',
-          description: 'Praxisberichte, Gesetzesänderungen, Best Practices.',
+          description: 'Gesetzesaenderungen, Best Practices, Fallberichte.',
         },
         {
           title: 'Webinare',
           href: '/ressourcen/webinare',
-          description: 'Aufzeichnungen und Live-Termine, ohne Anmeldepflicht.',
+          description: 'Aufzeichnungen und Live-Termine. Keine Anmeldepflicht fuer Aufzeichnungen.',
+        },
+        {
+          title: 'FAQ',
+          href: '/ressourcen/faq',
+          description: 'Antworten auf die haeufigsten Fragen aus Architekturbueros.',
+        },
+      ],
+    },
+    {
+      heading: 'Bauen mit uns',
+      items: [
+        {
+          title: 'Strota Kommune',
+          href: '/kommune',
+          description: 'B2G-Produkt fuer Bauaufsichtsbehoerden: Buerger-Chat, Eingangs-Screening, Wissensassistent.',
+          badge: 'Roadmap',
         },
         {
           title: 'Roadmap',
           href: '/ressourcen/roadmap',
           description: 'Was wir wann freischalten, transparent dokumentiert.',
+        },
+        {
+          title: 'Status',
+          href: '/status',
+          description: 'Live-Verfuegbarkeit aller Services. Auto-Update.',
+        },
+        {
+          title: 'Entwickler-API',
+          href: '/ressourcen/api',
+          description: 'OpenAPI v3.1, OAuth2, XBau-Submit. Bauträger-Plan und Enterprise.',
+          badge: 'Roadmap',
         },
       ],
     },
@@ -248,6 +389,8 @@ export const RESSOURCEN: NavCategory = {
   cta: { label: 'Newsletter abonnieren', href: '/ressourcen/newsletter' },
 };
 
-export const CATEGORIES: NavCategory[] = [PLANEN, SANIEREN, UMBAUEN, RESSOURCEN];
+export const CATEGORIES: NavCategory[] = [PLANEN, SANIEREN, UMBAUEN, TOOLS, RESSOURCEN];
 
-export const PRIMARY_LINKS: { label: string; href: string }[] = [{ label: 'Preise', href: '/preise' }];
+export const PRIMARY_LINKS: { label: string; href: string }[] = [
+  { label: 'Preise', href: '/preise' },
+];
