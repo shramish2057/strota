@@ -5,7 +5,7 @@ services:
     image: postgres:17-alpine
     container_name: strota-postgres
     ports:
-      - '54322:5432'
+      - '55432:5432'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: strota_dev

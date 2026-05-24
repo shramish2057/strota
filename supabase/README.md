@@ -32,7 +32,7 @@ supabase status                        # Shows API URL, anon key, service-role k
 ```bash
 docker compose -f docker-compose.db.yml up -d
 # Apply migrations with psql:
-PGPASSWORD=strota_dev psql -h 127.0.0.1 -p 54322 -U postgres -d strota \
+PGPASSWORD=strota_dev psql -h 127.0.0.1 -p 55432 -U postgres -d strota \
   -v ON_ERROR_STOP=1 \
   -f supabase/migrations/001_initial_schema.sql \
   -f supabase/migrations/002_rls_policies.sql \
