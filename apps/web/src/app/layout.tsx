@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { CookieConsent } from '../components/cookie-consent';
+import { SiteFooter } from '../components/site-footer';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
@@ -30,6 +32,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           Zum Hauptinhalt springen
         </a>
         <main id="main">{children}</main>
+        <SiteFooter />
+        <CookieConsent />
       </body>
     </html>
   );
