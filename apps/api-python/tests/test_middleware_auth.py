@@ -8,8 +8,12 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-os.environ.setdefault("HMAC_SECRET", "x" * 32)
-os.environ.setdefault("ENVIRONMENT", "testing")
+# Test owns the secret. Force-overwrite any HMAC_SECRET inherited from the
+# shell or CI so test signs and verifies with the same value. setdefault is
+# not safe because CI presets HMAC_SECRET to a different placeholder.
+SECRET = "x" * 32
+os.environ["HMAC_SECRET"] = SECRET
+os.environ["ENVIRONMENT"] = "testing"
 
 from strota_api.config import get_settings  # noqa: E402
 from strota_api.main import create_app  # noqa: E402
@@ -21,8 +25,6 @@ from strota_api.security.hmac import (  # noqa: E402
     sign_request,
 )
 from strota_api.security.nonce_store import InMemoryNonceStore  # noqa: E402
-
-SECRET = "x" * 32
 
 
 @pytest.fixture()

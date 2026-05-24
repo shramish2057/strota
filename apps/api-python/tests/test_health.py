@@ -7,12 +7,18 @@ import os
 import pytest
 from fastapi.testclient import TestClient
 
+# Same fix as test_middleware_auth.py: force the secret so tests are
+# independent of the shell/CI HMAC_SECRET value.
+os.environ["HMAC_SECRET"] = "x" * 32
+os.environ.setdefault("ENVIRONMENT", "testing")
+
 
 @pytest.fixture(scope="module")
 def client() -> TestClient:
-    os.environ.setdefault("HMAC_SECRET", "x" * 32)
+    from strota_api.config import get_settings
     from strota_api.main import create_app
 
+    get_settings.cache_clear()  # type: ignore[attr-defined]
     return TestClient(create_app())
 
 
