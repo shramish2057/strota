@@ -38,7 +38,7 @@ export type NavCategory = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Architekt:innen — Freiberufler tier (29 EUR/mo)                            */
+/* Architekt:innen - Freiberufler tier (29 EUR/mo)                            */
 /* -------------------------------------------------------------------------- */
 
 export const ARCHITEKTEN: NavCategory = {
@@ -119,7 +119,7 @@ export const ARCHITEKTEN: NavCategory = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Buero — Buero tier (79 EUR/mo, 2-15 person offices)                        */
+/* Buero - Buero tier (79 EUR/mo, 2-15 person offices)                        */
 /* -------------------------------------------------------------------------- */
 
 export const BUEROS: NavCategory = {
@@ -187,7 +187,7 @@ export const BUEROS: NavCategory = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Bautraeger — Bautraeger tier (299 EUR/mo) + Enterprise custom              */
+/* Bautraeger - Bautraeger tier (299 EUR/mo) + Enterprise custom              */
 /* -------------------------------------------------------------------------- */
 
 export const BAUTRAEGER: NavCategory = {
@@ -261,7 +261,7 @@ export const BAUTRAEGER: NavCategory = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Behoerden — Strota Kommune (8.000 - 60.000 EUR/year)                       */
+/* Behoerden - Strota Kommune (8.000 - 60.000 EUR/year)                       */
 /* -------------------------------------------------------------------------- */
 
 export const BEHOERDEN: NavCategory = {
