@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "bundesland_code": "BY",
+  "rechtsgrundlage": {
+    "norm": "BayBO",
+    "artikel": [57, 58, 59, 60, 63],
+    "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO",
+    "effective_from": "2008-01-01",
+    "last_verified_at": "2026-05-25",
+    "lizenz_status": "public_domain"
+  },
+  "verfahrensarten": [
+    {
+      "code": "verfahrensfrei",
+      "name": "Verfahrensfrei",
+      "rechtsgrundlage": "Art. 57 BayBO",
+      "konsequenz": "Kein Antrag und keine Anzeige beim Bauamt erforderlich",
+      "pflicht_dokumente_count": 0,
+      "behoerde_typ": null
+    },
+    {
+      "code": "verfahrensfrei_anzeige",
+      "name": "Verfahrensfrei mit Anzeige",
+      "rechtsgrundlage": "Art. 57 Abs. 5 BayBO (Beseitigung) und einzelne LBO-Tatbestaende",
+      "konsequenz": "Anzeige beim Bauamt mindestens einen Monat vor Beginn; keine Genehmigung",
+      "pflicht_dokumente_count": 1,
+      "behoerde_typ": "bauaufsichtsbehoerde"
+    },
+    {
+      "code": "freistellung",
+      "name": "Genehmigungsfreistellung",
+      "rechtsgrundlage": "Art. 58 BayBO",
+      "voraussetzungen": [
+        "Wohngebaeude der Gebaeudeklassen 1 bis 3",
+        "Vorhaben im Geltungsbereich eines qualifizierten Bebauungsplans nach Paragraph 30 Abs. 1 BauGB",
+        "Gemeinde erklaert nicht binnen einem Monat dass Genehmigungsverfahren durchgefuehrt werden soll",
+        "Vorhaben entspricht den Festsetzungen des Bebauungsplans und der Erschliessung"
+      ],
+      "konsequenz": "Bauherr kann nach Ablauf der Monatsfrist mit Bauausfuehrung beginnen ohne Genehmigung",
+      "pflicht_dokumente_count": 6,
+      "behoerde_typ": "gemeinde"
+    },
+    {
+      "code": "vereinfacht",
+      "name": "Vereinfachtes Genehmigungsverfahren",
+      "rechtsgrundlage": "Art. 59 BayBO",
+      "voraussetzungen": [
+        "Wohngebaeude bis Gebaeudeklasse 3",
+        "Nicht-Sonderbau",
+        "Bauaufsichtsbehoerde prueft nur Planungsrecht, nicht Bautechnik"
+      ],
+      "konsequenz": "Genehmigungsfiktion nach 3 Monaten (Art. 68 Abs. 2 BayBO)",
+      "pflicht_dokumente_count": 12,
+      "behoerde_typ": "bauaufsichtsbehoerde"
+    },
+    {
+      "code": "genehmigung",
+      "name": "Genehmigungsverfahren",
+      "rechtsgrundlage": "Art. 60 BayBO",
+      "voraussetzungen": [
+        "Vorhaben ausserhalb der Anwendungsbereiche von Art. 57, 58 und 59 BayBO"
+      ],
+      "konsequenz": "Vollumfaengliche Pruefung Planungsrecht und Bautechnik durch Bauaufsichtsbehoerde",
+      "pflicht_dokumente_count": 20,
+      "behoerde_typ": "bauaufsichtsbehoerde"
+    },
+    {
+      "code": "sonderbau",
+      "name": "Sonderbauverfahren",
+      "rechtsgrundlage": "Art. 60 i.V.m. Art. 2 Abs. 4 BayBO",
+      "voraussetzungen": [
+        "Vorhaben faellt unter Sonderbau-Katalog (Art. 2 Abs. 4 BayBO Nrn. 1-20)"
+      ],
+      "konsequenz": "Volles Verfahren plus Brandschutzkonzept zwingend; ggf. Beteiligung Gesundheitsamt, Gewerbeaufsicht, Feuerwehr",
+      "pflicht_dokumente_count": 25,
+      "behoerde_typ": "bauaufsichtsbehoerde"
+    },
+    {
+      "code": "abweichung_isoliert",
+      "name": "Isoliertes Abweichungsverfahren",
+      "rechtsgrundlage": "Art. 63 BayBO",
+      "voraussetzungen": [
+        "Abweichung von LBO-Vorschriften (z.B. Abstandsflaechen, Brandschutz, Stellplatz, Barrierefreiheit)",
+        "Vorhaben sonst genehmigungsfaehig"
+      ],
+      "konsequenz": "Separates Verfahren; kann als Beiantrag zum Hauptverfahren oder isoliert beantragt werden",
+      "pflicht_dokumente_count": 3,
+      "behoerde_typ": "bauaufsichtsbehoerde"
+    },
+    {
+      "code": "nachgenehmigung",
+      "name": "Nachtraegliche Genehmigung",
+      "rechtsgrundlage": "Bestandsregelungen LBO",
+      "voraussetzungen": ["Bereits errichtete Bauten ohne Genehmigung"],
+      "konsequenz": "Bestandsdokumentation plus regulaeres Verfahren",
+      "pflicht_dokumente_count": 22,
+      "behoerde_typ": "bauaufsichtsbehoerde"
+    }
+  ],
+  "entscheidungs_regeln": [
+    {
+      "id": "by-regel-1-sonderbau-zuerst",
+      "prioritaet": 1,
+      "if": {"is_sonderbau": true},
+      "then": {"verfahrensart": "sonderbau"},
+      "begruendung": "Sonderbau-Eigenschaft (Art. 2 Abs. 4 BayBO) ueberschreibt alle anderen Verfahrenseinstufungen"
+    },
+    {
+      "id": "by-regel-2-verfahrensfrei-direkt",
+      "prioritaet": 2,
+      "if": {"matches_verfahrensfrei_rule": true},
+      "then": {"verfahrensart": "verfahrensfrei"},
+      "begruendung": "Vorhaben erfuellt Tatbestand des Art. 57 BayBO"
+    },
+    {
+      "id": "by-regel-3-freistellung-wohnen-gk1-3-bplan",
+      "prioritaet": 3,
+      "if": {
+        "nutzung": "wohnbaulich",
+        "gk_max": "GK3",
+        "plot_situation": "qualifizierter_bplan_30_abs_1",
+        "entspricht_festsetzungen": true,
+        "erschliessung_gesichert": true
+      },
+      "then": {"verfahrensart": "freistellung"},
+      "begruendung": "Voraussetzungen des Art. 58 BayBO erfuellt"
+    },
+    {
+      "id": "by-regel-4-vereinfacht-gk1-3-nicht-sonderbau",
+      "prioritaet": 4,
+      "if": {
+        "gk_max": "GK3",
+        "is_sonderbau": false,
+        "plot_situation_not": "qualifizierter_bplan_30_abs_1_mit_freistellung"
+      },
+      "then": {"verfahrensart": "vereinfacht"},
+      "begruendung": "Voraussetzungen des Art. 59 BayBO erfuellt"
+    },
+    {
+      "id": "by-regel-5-genehmigung-fallback",
+      "prioritaet": 999,
+      "if": {"otherwise": true},
+      "then": {"verfahrensart": "genehmigung"},
+      "begruendung": "Vorhaben faellt nicht unter Art. 57, 58 oder 59 BayBO; volles Verfahren nach Art. 60 BayBO"
+    }
+  ]
+}

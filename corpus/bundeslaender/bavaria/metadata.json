@@ -1,0 +1,63 @@
+{
+  "bundesland_code": "BY",
+  "bundesland_name": "Bayern",
+  "corpus_version": "2026.05.25.1",
+  "schema_version": "1.0",
+  "primary_sources": [
+    {
+      "name": "Bayerische Bauordnung (BayBO)",
+      "kuerzel": "BayBO",
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO",
+      "quelle_typ": "gesetzesblatt",
+      "lizenz_status": "public_domain",
+      "lizenz_grundlage": "§5 Abs. 1 UrhG (amtliches Werk)",
+      "effective_from": "2008-01-01",
+      "last_consolidation": "2024-12-15",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "name": "Bauvorlagenverordnung Bayern (BauVorlV)",
+      "kuerzel": "BauVorlV",
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBauVorlV",
+      "quelle_typ": "gesetzesblatt",
+      "lizenz_status": "public_domain",
+      "lizenz_grundlage": "§5 Abs. 1 UrhG",
+      "effective_from": "2007-09-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "name": "Verordnung zur Durchfuehrung der BayBO (DVO BayBO)",
+      "kuerzel": "DVO BayBO",
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBauOAV",
+      "quelle_typ": "gesetzesblatt",
+      "lizenz_status": "public_domain",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "name": "Kostengesetz (BayKG)",
+      "kuerzel": "BayKG",
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayKG",
+      "quelle_typ": "gesetzesblatt",
+      "lizenz_status": "public_domain",
+      "last_verified_at": "2026-05-25"
+    }
+  ],
+  "coverage": {
+    "phase_4_status": "in_progress",
+    "art_57_tatbestaende_coverage": "comprehensive_top_tatbestaende",
+    "art_2_abs_4_sonderbau_katalog": "complete_20_of_20",
+    "gemeinden_count": 2056,
+    "landratsaemter_count": 71,
+    "kreisfreie_staedte_count": 25,
+    "bauamt_directory_coverage": "all_71_LRA_plus_25_kreisfreie_Staedte",
+    "gemeinde_satzungen_coverage_landeshauptstadt_muenchen": "stellplatzsatzung_only"
+  },
+  "kuratiert_durch": "Strota Founder + Internal Review",
+  "domain_expert_validierung": {
+    "phase_4_5_status": "pending_external_recruitment",
+    "anforderung": "Mindestens 3 bayerische Architekten + 20 reale Vergleichs-Faelle",
+    "bezahlung": "EUR 500-700 pro 3h Session",
+    "blocker_fuer_phase_5": true
+  }
+}

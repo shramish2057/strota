@@ -87,6 +87,27 @@ class Settings(BaseSettings):
     email_from_name: str = Field(default="Strota")
     public_web_url: str = Field(default="http://localhost:3000")
 
+    # Phase 3.5 + 4: Genehmigungsfrei-Pruefer and Corpus.
+    corpus_dir: str = Field(
+        default="../../corpus",
+        description="Path to the regulatory corpus directory, resolved relative to the api-python package root.",
+    )
+    bkg_api_key: str | None = Field(
+        default=None,
+        description="BKG Geokodierungsdienst API key (sign-up at adv-online.de). If unset, AGS resolution falls back to the local PLZ-to-AGS table.",
+    )
+    bkg_base_url: str = Field(
+        default="https://sg.geodatenzentrum.de/gdz_geokodierung_bund__",
+        description="BKG Bundes-Geokodierungsdienst endpoint base. Token segment is appended at request time.",
+    )
+    bkg_timeout_seconds: float = Field(default=4.0, ge=0.5, le=10.0)
+
+    # Public IP-hash rate limiter (Genehmigungsfrei-Pruefer, Dokument-Analyse).
+    public_rate_limit_per_day: int = Field(default=10, ge=1, le=10_000)
+    public_rate_limit_table: str = Field(default="public_rate_limit_buckets")
+    # Daily-rotating salt for IP hashing (rotated by a Postgres cron, see migration).
+    public_rate_limit_salt_table: str = Field(default="public_rate_limit_salts")
+
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:

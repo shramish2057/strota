@@ -34,7 +34,7 @@ from ..security.mtls import check_allowlist, fingerprint_from_pem, is_valid_fing
 from ..security.nonce_store import InMemoryNonceStore, NonceStore, RedisNonceStore
 
 PUBLIC_PATHS: frozenset[str] = frozenset({"/healthz", "/readyz", "/openapi.json"})
-PUBLIC_PREFIXES: tuple[str, ...] = ("/api/auth/",)
+PUBLIC_PREFIXES: tuple[str, ...] = ("/api/auth/", "/api/public/")
 
 MTLS_HEADER = "x-forwarded-client-cert"
 MTLS_FINGERPRINT_HEADER = "x-client-cert-fingerprint-sha256"

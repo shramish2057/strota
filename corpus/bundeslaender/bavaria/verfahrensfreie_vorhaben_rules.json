@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "bundesland_code": "BY",
+  "rechtsgrundlage_kapitel": {
+    "norm": "BayBO",
+    "artikel": 57,
+    "titel": "Verfahrensfreie Vorhaben, Beseitigung von Anlagen",
+    "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+    "lizenz_status": "public_domain"
+  },
+  "rules": [
+    {
+      "id": "by-art57-1-1-a-gebaeude-ohne-aufenthaltsraum",
+      "title": "Gebaeude ohne Aufenthaltsraeume bis 75 Kubikmeter umbauter Raum",
+      "project_types": ["nebengebaeude", "gartenhuette", "schuppen"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 1,
+        "buchstabe": "a",
+        "zitiertext": "Gebaeude ohne Aufenthaltsraeume, ohne Toiletten und ohne Feuerstaetten mit einem Brutto-Rauminhalt bis zu 75 Kubikmetern, ausser im Aussenbereich"
+      },
+      "conditions_all": [
+        {"feld": "brutto_rauminhalt_m3", "operator": "<=", "wert": 75},
+        {"feld": "hat_aufenthaltsraum", "operator": "==", "wert": false},
+        {"feld": "hat_toilette", "operator": "==", "wert": false},
+        {"feld": "hat_feuerstaette", "operator": "==", "wert": false}
+      ],
+      "conditions_excluded": [
+        {"feld": "im_aussenbereich", "operator": "==", "wert": true, "verdict_when_excluded": "antrag_erforderlich"}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "ueberschwemmungsgebiet", "naturschutz", "gestaltungssatzung"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-1-1-b-garage",
+      "title": "Garagen und ueberdachte Stellplaetze bis 50 Quadratmeter",
+      "project_types": ["garage", "carport"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 1,
+        "buchstabe": "b",
+        "zitiertext": "Garagen einschliesslich ueberdachter Stellplaetze mit einer Brutto-Grundflaeche bis zu 50 Quadratmetern und einer mittleren Wandhoehe bis zu 3 Metern, ausser im Aussenbereich"
+      },
+      "conditions_all": [
+        {"feld": "brutto_grundflaeche_m2", "operator": "<=", "wert": 50},
+        {"feld": "mittlere_wandhoehe_m", "operator": "<=", "wert": 3.0}
+      ],
+      "conditions_excluded": [
+        {"feld": "im_aussenbereich", "operator": "==", "wert": true, "verdict_when_excluded": "antrag_erforderlich"}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "ueberschwemmungsgebiet", "naturschutz", "gestaltungssatzung"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-1-1-h-terrassenueberdachung",
+      "title": "Terrassenueberdachungen bis 30 Quadratmeter und 3 Meter Tiefe",
+      "project_types": ["terrassenueberdachung", "pergola"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 1,
+        "buchstabe": "h",
+        "zitiertext": "Terrassenueberdachungen mit einer Flaeche bis zu 30 Quadratmetern und einer Tiefe bis zu 3 Metern"
+      },
+      "conditions_all": [
+        {"feld": "brutto_grundflaeche_m2", "operator": "<=", "wert": 30},
+        {"feld": "tiefe_m", "operator": "<=", "wert": 3.0}
+      ],
+      "conditions_excluded": [
+        {"feld": "im_aussenbereich", "operator": "==", "wert": true, "verdict_when_excluded": "antrag_erforderlich"}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "ueberschwemmungsgebiet", "gestaltungssatzung", "erhaltungssatzung"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-1-3-solaranlage-an-auf-gebaeuden",
+      "title": "Solaranlagen in, an und auf Dach- und Aussenwandflaechen",
+      "project_types": ["solaranlage_dach", "pv_anlage_dach"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 3,
+        "zitiertext": "Solarenergieanlagen in, an und auf Dach- und Aussenwandflaechen, ausgenommen bei Hochhaeusern, sowie die damit verbundenen Aufstaenderungen und Halterungen"
+      },
+      "conditions_all": [
+        {"feld": "ist_an_oder_auf_gebaeude", "operator": "==", "wert": true}
+      ],
+      "conditions_excluded": [
+        {"feld": "ist_hochhaus", "operator": "==", "wert": true, "verdict_when_excluded": "antrag_erforderlich"}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "ensembleschutz", "gestaltungssatzung"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2023-01-01",
+      "last_verified_at": "2026-05-25",
+      "hinweis": "Bayern hat 2023 die Verfahrensfreiheit fuer Dach- und Fassaden-PV deutlich erweitert (Solar-Beschleunigungsgesetz)."
+    },
+    {
+      "id": "by-art57-1-3-freiflaechen-pv",
+      "title": "Freiflaechen-PV-Anlagen bis 3 Meter Hoehe und 9 Meter Laenge",
+      "project_types": ["solaranlage_freiflaeche", "pv_anlage_freiflaeche"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 3,
+        "zitiertext": "Sonstige Solarenergieanlagen mit einer Hoehe bis zu 3 Metern und einer Gesamtlaenge bis zu 9 Metern"
+      },
+      "conditions_all": [
+        {"feld": "hoehe_m", "operator": "<=", "wert": 3.0},
+        {"feld": "gesamtlaenge_m", "operator": "<=", "wert": 9.0}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "naturschutz", "ueberschwemmungsgebiet"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2023-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-1-7-mauern-einfriedungen",
+      "title": "Mauern und Einfriedungen bis 2 Meter Hoehe",
+      "project_types": ["zaun", "mauer", "stuetzmauer", "einfriedung"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 7,
+        "zitiertext": "Mauern einschliesslich Stuetzmauern und Einfriedungen mit einer Hoehe bis zu 2 Metern, ausser im Aussenbereich"
+      },
+      "conditions_all": [
+        {"feld": "hoehe_m", "operator": "<=", "wert": 2.0}
+      ],
+      "conditions_excluded": [
+        {"feld": "im_aussenbereich", "operator": "==", "wert": true, "verdict_when_excluded": "antrag_erforderlich"}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "gestaltungssatzung", "ortssatzung_einfriedung"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-1-12-werbeanlagen-klein",
+      "title": "Werbeanlagen bis 1 Quadratmeter",
+      "project_types": ["werbeanlage"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 12,
+        "zitiertext": "Werbeanlagen mit einer Ansichtsflaeche bis zu 1 Quadratmeter sowie staettenbezogene Werbeanlagen an der Staette der Leistung"
+      },
+      "conditions_all": [
+        {"feld": "ansichtsflaeche_m2", "operator": "<=", "wert": 1.0}
+      ],
+      "sonderlage_trigger": ["denkmalschutz", "werbeanlagensatzung", "gestaltungssatzung"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-1-11-schornsteine",
+      "title": "Schornsteine bis 10 Meter Hoehe",
+      "project_types": ["schornstein"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 1,
+        "nummer": 11,
+        "zitiertext": "Schornsteine und Abgasleitungen mit einer Hoehe bis zu 10 Metern ueber der Dachhaut"
+      },
+      "conditions_all": [
+        {"feld": "hoehe_ueber_dach_m", "operator": "<=", "wert": 10.0}
+      ],
+      "sonderlage_trigger": ["denkmalschutz"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-2-instandhaltung",
+      "title": "Instandhaltungsarbeiten",
+      "project_types": ["instandhaltung", "renovierung_ohne_eingriff"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 2,
+        "zitiertext": "Verfahrensfrei sind Instandhaltungsarbeiten"
+      },
+      "conditions_all": [
+        {"feld": "ist_instandhaltung_ohne_eingriff", "operator": "==", "wert": true},
+        {"feld": "eingriff_in_tragende_teile", "operator": "==", "wert": false},
+        {"feld": "eingriff_in_brandschutz", "operator": "==", "wert": false},
+        {"feld": "veraenderung_aussenhuelle", "operator": "==", "wert": false}
+      ],
+      "sonderlage_trigger": ["denkmalschutz"],
+      "requires_anzeige": false,
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    },
+    {
+      "id": "by-art57-4-beseitigung-kleine-anlagen",
+      "title": "Beseitigung von Anlagen bis 300 Kubikmeter umbauter Raum",
+      "project_types": ["abbruch_klein"],
+      "rechtsgrundlage": {
+        "artikel": 57,
+        "absatz": 4,
+        "nummer": 1,
+        "zitiertext": "Verfahrensfrei sind die Beseitigung von freistehenden Gebaeuden bis zu 300 Kubikmetern umbauten Raumes"
+      },
+      "conditions_all": [
+        {"feld": "brutto_rauminhalt_m3", "operator": "<=", "wert": 300},
+        {"feld": "ist_freistehend", "operator": "==", "wert": true}
+      ],
+      "requires_anzeige": true,
+      "anzeige_pflicht_grundlage": "Art. 57 Abs. 5 BayBO: Anzeige der Beseitigung mindestens einen Monat vor Beginn beim Bauamt",
+      "sonderlage_trigger": ["denkmalschutz", "schadstoff_pruefung_pflicht"],
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-57",
+      "effective_from": "2008-01-01",
+      "last_verified_at": "2026-05-25"
+    }
+  ],
+  "fallback_verdicts": [
+    {
+      "id": "neubau_wohngebaeude_immer_antragspflichtig",
+      "project_types": ["neubau_wohngebaeude_efh", "neubau_wohngebaeude_mfh"],
+      "verdict": "antrag_erforderlich",
+      "begruendung": "Neubau eines Wohngebaeudes ist nie verfahrensfrei. Es greift Genehmigungsfreistellung (Art. 58), vereinfachtes (Art. 59) oder volles Verfahren (Art. 60), abhaengig von Plot-Situation und Gebaeudeklasse. Strota bestimmt das exakte Verfahren in Modul 0 nach Login.",
+      "cta": {
+        "label": "Vollstaendige Verfahrensbestimmung starten",
+        "href": "/signup?intent=neubau"
+      }
+    },
+    {
+      "id": "anbau_immer_pruefpflichtig",
+      "project_types": ["anbau", "erweiterung", "aufstockung"],
+      "verdict": "antrag_erforderlich",
+      "begruendung": "Anbauten und Aufstockungen sind nur unter sehr engen Voraussetzungen verfahrensfrei (Art. 57 BayBO; z.B. Terrassenueberdachung bis 30 m2). In der Regel ist ein Bauantrag erforderlich. Strota bestimmt das exakte Verfahren und die Pflichtnachweise in Modul 0.",
+      "cta": {
+        "label": "Anbau-Projekt anlegen",
+        "href": "/signup?intent=anbau"
+      }
+    },
+    {
+      "id": "nutzungsaenderung_immer_pruefen",
+      "project_types": ["nutzungsaenderung"],
+      "verdict": "grenzfall",
+      "begruendung": "Nutzungsaenderung ist nach Art. 57 Abs. 4 Nr. 1 BayBO verfahrensfrei, wenn fuer die neue Nutzung keine anderen oder weitergehenden Anforderungen nach oeffentlich-rechtlichen Vorschriften gelten. In der Praxis ist dies haeufig nicht der Fall (Brandschutz, Schallschutz, BauNVO-Gebietstyp). Bauvoranfrage nach Art. 71 BayBO empfohlen.",
+      "cta": {
+        "label": "Bauvoranfrage vorbereiten",
+        "href": "/signup?intent=nutzungsaenderung"
+      }
+    },
+    {
+      "id": "wintergarten_pruefpflichtig",
+      "project_types": ["wintergarten"],
+      "verdict": "antrag_erforderlich",
+      "begruendung": "Ein Wintergarten ist ein Gebaeude mit Aufenthaltsmoeglichkeit und faellt damit nicht unter die Verfahrensfreiheit fuer Terrassenueberdachungen (Art. 57 Abs. 1 Nr. 1 Buchstabe h BayBO). Vereinfachtes oder volles Verfahren je nach Groesse und GK.",
+      "cta": {
+        "label": "Verfahren bestimmen",
+        "href": "/signup?intent=wintergarten"
+      }
+    },
+    {
+      "id": "umbau_innen_eingriff_pruefen",
+      "project_types": ["umbau_innen", "dachausbau"],
+      "verdict": "grenzfall",
+      "begruendung": "Innenumbau und Dachausbau sind verfahrensfrei, sofern keine Eingriffe in tragende Teile, Brandschutz oder Aussenhuelle erfolgen. Bei Eingriff in die Statik oder bei Aenderung der Wohnflaeche oder Anzahl der Wohneinheiten besteht regelmaessig Antragspflicht.",
+      "cta": {
+        "label": "Pruefung mit Architekt starten",
+        "href": "/signup?intent=umbau"
+      }
+    }
+  ],
+  "deckung_hinweis": "Diese Sammlung deckt die haeufigsten Verfahrensfreiheits-Tatbestaende der BayBO Art. 57 ab. Vollstaendiger Korpus mit allen rund 40 Tatbestaenden inkl. Spezialfaelle (Folientunnel, fliegende Bauten, Antennen, Wohnwagen, etc.) erfolgt in der Phase 4.5 Domain-Experten-Validierung."
+}

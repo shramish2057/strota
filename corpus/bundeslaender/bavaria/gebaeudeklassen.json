@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "bundesland_code": "BY",
+  "rechtsgrundlage": {
+    "norm": "BayBO",
+    "artikel": 2,
+    "absatz": 3,
+    "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-2",
+    "effective_from": "2008-01-01",
+    "last_verified_at": "2026-05-25",
+    "lizenz_status": "public_domain"
+  },
+  "klassen": [
+    {
+      "code": "GK1",
+      "name": "Gebaeudeklasse 1",
+      "kriterien": {
+        "max_hoehe_m_oberkante_fertigfussboden_aufenthaltsraum": 7.0,
+        "max_anzahl_nutzungseinheiten": 2,
+        "max_brutto_grundflaeche_je_nutzungseinheit_m2": 400,
+        "umfasst_freistehend": true,
+        "umfasst_land_forstwirtschaftlich_genutzt": true
+      },
+      "beispiele": ["Freistehendes Einfamilienhaus", "Doppelhaus (jede Haelfte fuer sich)", "Land- oder forstwirtschaftliche Betriebsgebaeude"]
+    },
+    {
+      "code": "GK2",
+      "name": "Gebaeudeklasse 2",
+      "kriterien": {
+        "max_hoehe_m_oberkante_fertigfussboden_aufenthaltsraum": 7.0,
+        "max_anzahl_nutzungseinheiten": 2,
+        "max_brutto_grundflaeche_je_nutzungseinheit_m2": 400,
+        "umfasst_freistehend": false,
+        "abgrenzung_gk1": "wie GK1 aber nicht freistehend (z.B. Reihenhaus)"
+      },
+      "beispiele": ["Reihenhaus", "Doppelhaushaelfte (auf gemeinsamem Grundstueck)"]
+    },
+    {
+      "code": "GK3",
+      "name": "Gebaeudeklasse 3",
+      "kriterien": {
+        "max_hoehe_m_oberkante_fertigfussboden_aufenthaltsraum": 7.0,
+        "min_oder_kein_max_anzahl_nutzungseinheiten": "mehr als 2 oder Brutto-Grundflaeche je Nutzungseinheit ueber 400 m2",
+        "umfasst_sonstige": "sonstige Gebaeude bis 7 m Hoehe"
+      },
+      "beispiele": ["Mehrfamilienhaus bis 7 m Hoehe", "Buerogebaeude bis 7 m Hoehe"]
+    },
+    {
+      "code": "GK4",
+      "name": "Gebaeudeklasse 4",
+      "kriterien": {
+        "max_hoehe_m_oberkante_fertigfussboden_aufenthaltsraum": 13.0,
+        "max_brutto_grundflaeche_je_nutzungseinheit_m2": 400
+      },
+      "beispiele": ["Mehrfamilienhaus 7-13 m Hoehe", "Buerogebaeude 7-13 m Hoehe"],
+      "konsequenz": "Erhoehte Anforderungen Brandschutz, Pruefsachverstaendiger erforderlich"
+    },
+    {
+      "code": "GK5",
+      "name": "Gebaeudeklasse 5",
+      "kriterien": {
+        "umfasst": "sonstige Gebaeude einschliesslich unterirdischer Gebaeude (z.B. Hochhaeuser nicht ueber 22 m)"
+      },
+      "beispiele": ["Wohngebaeude ueber 13 m Hoehe", "Buerogebaeude ueber 13 m Hoehe"],
+      "konsequenz": "Hoechste Brandschutz-Anforderungen, Pruefsachverstaendiger zwingend"
+    },
+    {
+      "code": "Sonderbau",
+      "name": "Sonderbau",
+      "kriterien": {
+        "definition_artikel": "Art. 2 Abs. 4 BayBO",
+        "katalog_referenz": "sonderbau_katalog.json"
+      },
+      "beispiele": ["Versammlungsstaette ueber 200 P.", "Hochhaus ueber 22 m", "Verkaufsstaette ueber 800 m2", "Kindertagesstaette", "Krankenhaus"],
+      "konsequenz": "Sonderbauverfahren nach Art. 60 BayBO i.V.m. Art. 2 Abs. 4 BayBO; Brandschutzkonzept zwingend; Beteiligung Gesundheitsamt/Gewerbeaufsicht/Feuerwehr ggf."
+    }
+  ]
+}

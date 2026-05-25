@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "bundesland_code": "BY",
+  "rechtsgrundlage": {
+    "norm": "BayBO",
+    "artikel": 2,
+    "absatz": 4,
+    "titel": "Sonderbauten",
+    "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayBO-2",
+    "effective_from": "2008-01-01",
+    "last_verified_at": "2026-05-25",
+    "lizenz_status": "public_domain"
+  },
+  "katalog": [
+    {
+      "nr": 1,
+      "kategorie": "Hochhaeuser",
+      "kriterien": {"hoehe_oberkante_fertigfussboden_aufenthaltsraum_ueber_m": 22.0},
+      "brandschutzkonzept_pflicht": true,
+      "sonderbauverordnung_ref": null,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 2,
+      "kategorie": "Bauliche Anlagen mit besonderem Personenkreis oder besonderer Personendichte",
+      "subkategorien": ["Versammlungsstaetten ueber 200 Personen", "Verkaufsstaetten ueber 800 Quadratmeter", "Gaststaetten mit mehr als 40 Gastplaetzen", "Beherbergungsstaetten mit mehr als 12 Betten"],
+      "brandschutzkonzept_pflicht": true,
+      "sonderbauverordnung_ref": ["vstaettvo", "vkv", "betrvo"],
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 3,
+      "kategorie": "Krankenhaeuser",
+      "kriterien": {"definition": "Krankenhaeuser und vergleichbare Einrichtungen"},
+      "brandschutzkonzept_pflicht": true,
+      "sonderbauverordnung_ref": ["khbauv"],
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 4,
+      "kategorie": "Pflegeheime, Pflegeeinrichtungen",
+      "kriterien": {"definition": "Heime und vergleichbare Einrichtungen zur Unterbringung von Personen"},
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 5,
+      "kategorie": "Tageseinrichtungen fuer Kinder, behinderte oder alte Menschen",
+      "subkategorien": ["Kindertagesstaetten ab 11 Kindern", "Tagespflegeeinrichtungen"],
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 6,
+      "kategorie": "Schulen, Hochschulen, aehnliche Einrichtungen",
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 7,
+      "kategorie": "Justizvollzugsanstalten und Massregelvollzugseinrichtungen",
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 8,
+      "kategorie": "Camping-, Wochenend- und Ferienplaetze",
+      "brandschutzkonzept_pflicht": false,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 9,
+      "kategorie": "Freizeit- und Vergnuegungsparks",
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 10,
+      "kategorie": "Fliegende Bauten, soweit sie einer Ausfuehrungsgenehmigung beduerfen",
+      "brandschutzkonzept_pflicht": false,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 11,
+      "kategorie": "Regallager mit Oberkante Lagerguthoehe ueber 7,50 m",
+      "kriterien": {"oberkante_lagerguthoehe_ueber_m": 7.5},
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 12,
+      "kategorie": "Bauliche Anlagen mit Brandschutz-Sondertatbestand",
+      "subkategorien": ["Anlagen mit Explosionsgefahr", "Anlagen mit besonderer Brandlast"],
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 13,
+      "kategorie": "Gebaeude mit mehr als 1.600 Quadratmetern Geschossflaeche eines Geschosses",
+      "kriterien": {"geschossflaeche_je_geschoss_ueber_m2": 1600},
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 14,
+      "kategorie": "Buero- und Verwaltungsgebaeude mit ueber 400 Quadratmetern Brutto-Grundflaeche je Nutzungseinheit",
+      "kriterien": {"bruttogrundflaeche_je_nutzungseinheit_ueber_m2": 400, "nutzung": "buero_verwaltung"},
+      "brandschutzkonzept_pflicht": false,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 15,
+      "kategorie": "Industriebau-Richtlinie-relevante Anlagen",
+      "sonderbauverordnung_ref": ["mindustriebaurl"],
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 16,
+      "kategorie": "Garagen ueber 100 Quadratmeter Brutto-Grundflaeche",
+      "kriterien": {"brutto_grundflaeche_ueber_m2": 100},
+      "sonderbauverordnung_ref": ["garstellv"],
+      "brandschutzkonzept_pflicht": false,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 17,
+      "kategorie": "Bauliche Anlagen, deren Nutzung durch Umgang mit explosionsgefaehrlichen Stoffen oder durch Druck, Lagerung von brennbaren Fluessigkeiten oder Gasen, beeintraechtigt wird",
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 18,
+      "kategorie": "Bauliche Anlagen mit Versammlungsraeumen, die im Einzelnen mehr als 200 Besucher fassen",
+      "brandschutzkonzept_pflicht": true,
+      "sonderbauverordnung_ref": ["vstaettvo"],
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 19,
+      "kategorie": "Spiel- und Sportstaetten mit Tribuenen",
+      "kriterien": {"definition": "Spiel- und Sportstaetten mit fuer mehr als 200 Besucher bestimmten Tribuenen"},
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    },
+    {
+      "nr": 20,
+      "kategorie": "Bauliche Anlagen, die nicht unter Nrn. 1 bis 19 fallen aber im Einzelfall der Genehmigung beduerfen",
+      "hinweis": "Auffangtatbestand fuer Sonderfaelle; Bauaufsichtsbehoerde entscheidet im Einzelfall",
+      "brandschutzkonzept_pflicht": true,
+      "verfahrensart": "sonderbau"
+    }
+  ],
+  "hinweis_sonderbauverordnungen": "Die Verordnungen (VStaettVO Versammlungsstaetten, VkV Verkaufsstaetten, KHBauV Krankenhaeuser, BetrVO Beherbergungsstaetten, GaStellV Garagen, M-IndBauRL Industriebau) ergaenzen Art. 2 Abs. 4 mit konkreten Schwellenwerten und Pflichtnachweisen pro Sonderbau-Typ. Diese werden in separaten Korpus-Dateien unter sonderbauvo/ gepflegt."
+}

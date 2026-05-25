@@ -17,7 +17,7 @@ from .db import close_pool, get_pool
 from .logging import configure_logging, get_logger
 from .middleware.auth import HmacAuthMiddleware
 from .routes import auth as auth_routes
-from .routes import health, internal
+from .routes import health, internal, public as public_routes
 
 
 @asynccontextmanager
@@ -61,6 +61,7 @@ def create_app() -> FastAPI:
     app.include_router(health.router)
     app.include_router(auth_routes.router)
     app.include_router(internal.router)
+    app.include_router(public_routes.router)
 
     return app
 

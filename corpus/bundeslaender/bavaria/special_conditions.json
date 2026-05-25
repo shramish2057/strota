@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "bundesland_code": "BY",
+  "beschreibung": "Sonderlagen, die parallele Genehmigungen ausloesen koennen, auch wenn das Vorhaben nach Art. 57 BayBO grundsaetzlich verfahrensfrei ist. Jede Sonderlage wird im Verdict-Ergebnis als Hinweis-Liste angezeigt.",
+  "sonderlagen": [
+    {
+      "code": "denkmalschutz",
+      "name": "Denkmalschutzgebiet oder Einzeldenkmal",
+      "rechtsgrundlage": "DSchG Bayern",
+      "quelle_url": "https://www.gesetze-bayern.de/Content/Document/BayDSchG",
+      "konsequenz": "Auch verfahrensfreie Vorhaben beduerfen denkmalschutzrechtlicher Erlaubnis nach Art. 6 DSchG Bayern",
+      "zustaendige_behoerde": "Untere Denkmalschutzbehoerde am Landratsamt oder kreisfreie Stadt",
+      "anfrage_hinweis": "Pruefung der Denkmaleigenschaft ueber Bayerischer Denkmal-Atlas (geoportal.bayern.de/denkmalatlas)"
+    },
+    {
+      "code": "ueberschwemmungsgebiet",
+      "name": "Festgesetztes Ueberschwemmungsgebiet",
+      "rechtsgrundlage": "WHG (Wasserhaushaltsgesetz) Paragraph 78",
+      "quelle_url": "https://www.gesetze-im-internet.de/whg_2009/__78.html",
+      "konsequenz": "Bauverbot grundsaetzlich; Ausnahmegenehmigung der unteren Wasserbehoerde erforderlich",
+      "zustaendige_behoerde": "Untere Wasserbehoerde am Landratsamt oder kreisfreie Stadt",
+      "anfrage_hinweis": "Pruefung ueber Bayerisches Landesamt fuer Umwelt (lfu.bayern.de) oder UmweltAtlas Bayern"
+    },
+    {
+      "code": "naturschutz",
+      "name": "Naturschutzgebiet oder Landschaftsschutzgebiet oder Natura-2000-Gebiet",
+      "rechtsgrundlage": "BNatSchG Paragraph 23, 26, 33",
+      "quelle_url": "https://www.gesetze-im-internet.de/bnatschg_2009/",
+      "konsequenz": "Naturschutzrechtliche Erlaubnis nach Art. 17ff BayNatSchG erforderlich",
+      "zustaendige_behoerde": "Untere Naturschutzbehoerde am Landratsamt oder kreisfreie Stadt"
+    },
+    {
+      "code": "ensembleschutz",
+      "name": "Ensembleschutz nach Bayerischem Denkmalschutzgesetz",
+      "rechtsgrundlage": "DSchG Bayern Art. 1 Abs. 3",
+      "konsequenz": "Aenderungen am Erscheinungsbild beduerfen Erlaubnis der unteren Denkmalschutzbehoerde",
+      "zustaendige_behoerde": "Untere Denkmalschutzbehoerde"
+    },
+    {
+      "code": "gestaltungssatzung",
+      "name": "Oertliche Gestaltungssatzung der Gemeinde",
+      "rechtsgrundlage": "Art. 81 BayBO i.V.m. Gemeindesatzung",
+      "konsequenz": "Anforderungen der Gestaltungssatzung sind einzuhalten; Verstoss begruendet ggf. Ordnungswidrigkeit",
+      "zustaendige_behoerde": "Gemeinde / Stadt"
+    },
+    {
+      "code": "erhaltungssatzung",
+      "name": "Erhaltungssatzung nach Paragraph 172 BauGB",
+      "rechtsgrundlage": "Paragraph 172 BauGB",
+      "konsequenz": "Aenderungen, die das Ortsbild beeintraechtigen, beduerfen gemeindlicher Genehmigung",
+      "zustaendige_behoerde": "Gemeinde / Stadt"
+    },
+    {
+      "code": "ortssatzung_einfriedung",
+      "name": "Oertliche Einfriedungs- oder Werbeanlagensatzung",
+      "rechtsgrundlage": "Art. 81 BayBO i.V.m. Gemeindesatzung",
+      "konsequenz": "Anforderungen pro Gemeinde unterschiedlich; oft strenger als Verfahrensfreiheit der BayBO",
+      "zustaendige_behoerde": "Gemeinde / Stadt"
+    },
+    {
+      "code": "werbeanlagensatzung",
+      "name": "Werbeanlagensatzung der Gemeinde",
+      "rechtsgrundlage": "Art. 81 BayBO",
+      "konsequenz": "Werbeanlagen koennen trotz BayBO-Verfahrensfreiheit gemeindlich genehmigungspflichtig sein"
+    },
+    {
+      "code": "schadstoff_pruefung_pflicht",
+      "name": "Schadstoff-Pruefpflicht vor Abbruch Altbau",
+      "rechtsgrundlage": "GewAbfV, KrWG, ArbSchG, GefStoffV",
+      "konsequenz": "Bei Abbruch von Gebaeuden vor Bj. 1995 sind Asbest-, KMF- und PCB-Pruefung verpflichtend; ueber Abbruchverfahren ist gesondert zu informieren",
+      "zustaendige_behoerde": "Gewerbeaufsichtsamt, Umweltamt"
+    }
+  ]
+}
