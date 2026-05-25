@@ -7,7 +7,8 @@ typed Verdict with one of five outcomes plus sonderlage hints.
 
 from __future__ import annotations
 
-from enum import Enum
+from collections.abc import Callable
+from enum import StrEnum
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field, field_validator
@@ -17,7 +18,6 @@ from ..corpus import (
     get_special_conditions,
     get_verfahrensfreie_rules,
 )
-
 
 # -----------------------------------------------------------------------------
 # Inputs
@@ -82,7 +82,7 @@ class GenehmigungsfreiInput(BaseModel):
 # -----------------------------------------------------------------------------
 
 
-class VerdictType(str, Enum):
+class VerdictType(StrEnum):
     """Per bible Surface S1: five outcome verdicts."""
 
     VERFAHRENSFREI = "verfahrensfrei"
@@ -144,7 +144,7 @@ LEGAL_DISCLAIMER = (
     "begruenden. Im Zweifel: Bauvoranfrage nach Art. 71 BayBO."
 )
 
-OPERATORS = {
+OPERATORS: dict[str, Callable[[Any, Any], bool]] = {
     "<=": lambda a, b: a is not None and a <= b,
     "<": lambda a, b: a is not None and a < b,
     ">=": lambda a, b: a is not None and a >= b,
@@ -323,7 +323,7 @@ def evaluate_genehmigungsfrei(payload: GenehmigungsfreiInput) -> Verdict:
         excluded, exc_data = _eval_exclusions(payload, rule.get("conditions_excluded", []))
         if excluded:
             # Rule says: if THIS condition is true, verdict is forced to antrag_erforderlich
-            verdict_override = (
+            verdict_override = str(
                 exc_data.get("verdict_when_excluded") if exc_data else "antrag_erforderlich"
             )
             sonderlagen = _active_sonderlagen(payload, rule.get("sonderlage_trigger", []))

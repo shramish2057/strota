@@ -493,6 +493,7 @@ def test_unknown_ags_returns_no_bauamt() -> None:
 
 def test_invalid_ags_format_rejected_at_input_layer() -> None:
     from pydantic import ValidationError
+
     from strota_api.engine import GenehmigungsfreiInput
 
     with pytest.raises(ValidationError):
@@ -501,6 +502,7 @@ def test_invalid_ags_format_rejected_at_input_layer() -> None:
 
 def test_non_bayern_bundesland_rejected() -> None:
     from pydantic import ValidationError
+
     from strota_api.engine import GenehmigungsfreiInput
 
     with pytest.raises(ValidationError):
@@ -509,6 +511,7 @@ def test_non_bayern_bundesland_rejected() -> None:
 
 def test_negative_measurements_rejected() -> None:
     from pydantic import ValidationError
+
     from strota_api.engine import GenehmigungsfreiInput
 
     with pytest.raises(ValidationError):
@@ -522,6 +525,7 @@ def test_negative_measurements_rejected() -> None:
 
 def test_empty_project_type_rejected() -> None:
     from pydantic import ValidationError
+
     from strota_api.engine import GenehmigungsfreiInput
 
     with pytest.raises(ValidationError):

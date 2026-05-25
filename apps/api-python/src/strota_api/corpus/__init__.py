@@ -6,6 +6,7 @@ explicit `corpus_reload()` call (used by CI tests).
 """
 
 from .loader import (
+    corpus_reload,
     get_bauamt_directory,
     get_gebaeudeklassen,
     get_metadata,
@@ -13,7 +14,6 @@ from .loader import (
     get_special_conditions,
     get_verfahrensart_rules,
     get_verfahrensfreie_rules,
-    corpus_reload,
 )
 
 __all__ = [

@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from ..config import get_settings
 
@@ -33,9 +33,9 @@ def _bavaria_dir() -> Path:
     return _resolve_corpus_root() / "bundeslaender" / "bavaria"
 
 
-def _load_json(path: Path) -> Any:
+def _load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as fh:
-        return json.load(fh)
+        return cast(dict[str, Any], json.load(fh))
 
 
 @lru_cache(maxsize=8)

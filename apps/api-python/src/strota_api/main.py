@@ -17,7 +17,8 @@ from .db import close_pool, get_pool
 from .logging import configure_logging, get_logger
 from .middleware.auth import HmacAuthMiddleware
 from .routes import auth as auth_routes
-from .routes import health, internal, public as public_routes
+from .routes import health, internal
+from .routes import public as public_routes
 
 
 @asynccontextmanager

@@ -12,20 +12,18 @@ whether to warn the user (cached vs live).
 
 from __future__ import annotations
 
-import asyncio
 import json
 import logging
 import re
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Literal
 
 import httpx
-from psycopg.rows import dict_row
 
 from ..config import get_settings
-from ..db import dict_cursor, get_pool
 from ..corpus import get_bauamt_directory
+from ..db import dict_cursor, get_pool
 
 logger = logging.getLogger(__name__)
 
@@ -138,7 +136,7 @@ async def _bkg_lookup(address: str) -> AGSResolution | None:
                 logger.warning("bkg_non_200", extra={"status": resp.status_code})
                 return None
             data = resp.json()
-    except (httpx.HTTPError, json.JSONDecodeError, asyncio.TimeoutError) as exc:
+    except (TimeoutError, httpx.HTTPError, json.JSONDecodeError) as exc:
         logger.warning("bkg_call_failed", extra={"err": str(exc)})
         return None
 
@@ -166,7 +164,7 @@ async def _bkg_lookup(address: str) -> AGSResolution | None:
 
 async def _cache_get(query_norm: str) -> AGSResolution | None:
     pool = await get_pool()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     async with pool.connection() as conn:
         async with dict_cursor(conn) as cur:
             await cur.execute(
@@ -192,7 +190,7 @@ async def _cache_get(query_norm: str) -> AGSResolution | None:
 
 async def _cache_put(query_norm: str, resolution: AGSResolution, ttl_days: int) -> None:
     pool = await get_pool()
-    valid_until = datetime.now(timezone.utc) + timedelta(days=ttl_days)
+    valid_until = datetime.now(UTC) + timedelta(days=ttl_days)
     async with pool.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(

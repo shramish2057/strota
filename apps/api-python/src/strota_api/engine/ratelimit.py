@@ -13,12 +13,11 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Literal
 
 from ..config import get_settings
 from ..db import dict_cursor, get_pool
-
 
 SURFACES = ("genehmigungsfrei", "dokument_analyse", "strota_fragt")
 Surface = Literal["genehmigungsfrei", "dokument_analyse", "strota_fragt"]
@@ -69,7 +68,7 @@ async def check_and_consume_rate_limit(
 
     salt = await _today_salt()
     ip_hash = _hash_ip(raw_ip, salt)
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(UTC).date()
 
     pool = await get_pool()
     async with pool.connection() as conn:
